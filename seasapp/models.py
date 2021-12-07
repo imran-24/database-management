@@ -14,7 +14,7 @@ class School_T(models.Model):
 class Department_T(models.Model):
     # DeptID = models.CharField(max_length=6, primary_key=True)
     departmentName = models.CharField(max_length=50,primary_key=True)
-    SchoolTitle = models.ForeignKey(School_T, on_delete=models.CASCADE)
+    schoolTitle = models.ForeignKey(School_T, on_delete=models.CASCADE)
 
     def __str__(self):
         return self. departmentName
@@ -24,16 +24,18 @@ class Course_T(models.Model):
     courseName = models.CharField(max_length=100)
     creditHour = models.IntegerField()
     departmentName= models.ForeignKey(Department_T, null=True, on_delete=models.CASCADE)
+    schoolTitle = models.ForeignKey(School_T,null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.courseID
 
-class Prerequisite_T(models.Model):
-    courseID = models.ForeignKey(Course_T, on_delete=models.CASCADE, null=True, related_name="OfferedCourseID")
-    prereqID = models.CharField(max_length=7, null=True)
+class CoOfferedCourse_T(models.Model):
+    offeredCourseID = models.ForeignKey(Course_T, on_delete=models.CASCADE, null=True, related_name="OfferedCourseID")
+    coofferredwith = models.ForeignKey(Course_T, on_delete=models.CASCADE, null=True, related_name="Coofferredwith")
 
     class Meta:
-        unique_together = (("courseID", "prereqID"),)
+        unique_together = (("offeredCourseID", "coofferredwith"),)
+
 
 class Room_T(models.Model):
     roomID = models.CharField(max_length=9, primary_key=True)

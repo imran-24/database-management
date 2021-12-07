@@ -12,7 +12,7 @@ def upload_file(request):
             file = request.FILES['file']
             instance = ModelWithFileField(file_field=file)
             instance.save()
-            # populate(file)
+            populate(file)
             return redirect('/success/')
     else:
         form = UploadFileForm()
@@ -20,6 +20,11 @@ def upload_file(request):
 
 
 
-# def populate(filename):
+def populate(filename):
 
-        # file= filename.name 
+    file= filename.name
+    df = pd.read_excel(filename,usecols=['SCHOOL_TITLE'],skiprows=3,nrows=4)
+    for schoolTitle in df.SCHOOL_TITLE:
+        school_model = School_T(schoolTitle=schoolTitle)
+        school_model.save()
+        print(schoolTitle)
