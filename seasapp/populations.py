@@ -21,10 +21,22 @@ def upload_file(request):
 
 
 def populate(filename):
-
+    
+    SchoolT =["SBE","SETS","SELS","SLASS","SPPH"]
+    for schoolTitle in SchoolT:
+        try:
+           school_model = School_T(schoolTitle=schoolTitle)
+           school_model.save()
+        except Exception as e:
+            pass
     file= filename.name
-    df = pd.read_excel(filename,usecols=['SCHOOL_TITLE'],skiprows=3,nrows=4)
-    for schoolTitle in df.SCHOOL_TITLE:
-        school_model = School_T(schoolTitle=schoolTitle)
-        school_model.save()
-        print(schoolTitle)
+    df = pd.read_excel(filename,usecols=['COFFER_COURSE_ID','COURSE_NAME','CREDIT_HOUR','SCHOOL_TITLE'],skiprows=3,nrows=26)
+    for courseID,courseName,creditHour,schoolT in zip(df.COFFER_COURSE_ID,df.COURSE_NAME,df.CREDIT_HOUR,
+                            df.SCHOOL_TITLE): 
+           
+                course_model = Course_T(courseID=courseID,courseName=courseName,
+                                    creditHour=creditHour,schoolTitle=schoolT)
+                course_model.save()
+          
+
+                print(schoolT)
