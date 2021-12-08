@@ -42,10 +42,11 @@ class Room_TAdmin(admin.ModelAdmin):
 admin.site.register(Room_T, Room_TAdmin)
 
 
+
 class Section_TAdmin(admin.ModelAdmin):
     list_display = ['sectionNo','courseID','capacity','enrolled','blocked',
-    'roomID','facultyID','startTime','endTime','day','semester','year','maxSize']
+    'roomID','facultyID','startTime','endTime','day','semester','year']
     search_fields=['sectionNo','courseID','capacity','enrolled','blocked',
-    'roomID','facultyID','startTime','endTime','day','semester','year','maxSize']
+    'roomID','facultyID','startTime','endTime','day','semester','year']
 
 admin.site.register(Section_T, Section_TAdmin)

@@ -50,12 +50,12 @@ class Faculty_T(models.Model):
     departmentName = models.ForeignKey(Department_T, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.facultyID
+        return str(self.facultyID)
 
 class Section_T(models.Model):
     # sectionID = models.CharField(max_length=40, primary_key=True)
     sectionNo = models.IntegerField()
-    courseID = models.ForeignKey(Course_T, on_delete=models.CASCADE)
+    courseID = models.ForeignKey(Course_T,null=True,on_delete=models.CASCADE)
     capacity = models.IntegerField(null=True)
     enrolled = models.IntegerField(null=True)
     blocked = models.CharField(max_length=3, null=True) 
@@ -66,7 +66,7 @@ class Section_T(models.Model):
     day = models.CharField(max_length=10, null=True)
     semester = models.CharField(max_length=6)
     year = models.IntegerField()
-    maxSize = models.IntegerField(null=True)
+   
 
     class Meta:
         unique_together = (("courseID","sectionNo","semester", "year"),)
