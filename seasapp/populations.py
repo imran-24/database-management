@@ -21,33 +21,33 @@ def upload_file(request):
 
 
 def populate(filename):
-    # # SchoolT
-    # SchoolT =["SBE","SETS","SELS","SLASS","SPPH"]
-    # for schoolTitle in SchoolT:
-    #     try:
-    #        school_model = School_T(schoolTitle=schoolTitle)
-    #        school_model.save()
-    #     except Exception as e:
-    #         pass
+    # SchoolT
+    SchoolT =["SBE","SETS","SELS","SLASS","SPPH"]
+    for schoolTitle in SchoolT:
+        try:
+           school_model = School_T(schoolTitle=schoolTitle)
+           school_model.save()
+        except Exception as e:
+            pass
 
-    # # Course_T
-    # file= filename.name
-    # df = pd.read_excel(filename,usecols=['COFFER_COURSE_ID','COURSE_NAME','CREDIT_HOUR','SCHOOL_TITLE'],skiprows=3,nrows=1000)
-    # for courseID,courseName,creditHour,schoolT in zip(df.COFFER_COURSE_ID,df.COURSE_NAME,df.CREDIT_HOUR,
-    #                         df.SCHOOL_TITLE): 
+    # Course_T
+    file= filename.name
+    df = pd.read_excel(filename,usecols=['COFFER_COURSE_ID','COURSE_NAME','CREDIT_HOUR','SCHOOL_TITLE'],skiprows=3,nrows=1000)
+    for courseID,courseName,creditHour,schoolT in zip(df.COFFER_COURSE_ID,df.COURSE_NAME,df.CREDIT_HOUR,
+                            df.SCHOOL_TITLE): 
            
-    #             course_model = Course_T(courseID=courseID,courseName=courseName,
-    #                                 creditHour=creditHour,schoolTitle_id=schoolT)
+                course_model = Course_T(courseID=courseID,courseName=courseName,
+                                    creditHour=creditHour,schoolTitle_id=schoolT)
                                     
-    #             course_model.save()
-    #             print(schoolT)
+                course_model.save()
+                print(schoolT)
 
-    # # Room_T
-    # df = pd.read_excel(filename,usecols=['ROOM_ID',"ROOM_CAPACITY"],skiprows=3,nrows=1000)
-    # for roomID,roomCapacity in zip(df.ROOM_ID,df.ROOM_CAPACITY):
+    # Room_T
+    df = pd.read_excel(filename,usecols=['ROOM_ID',"ROOM_CAPACITY"],skiprows=3,nrows=1000)
+    for roomID,roomCapacity in zip(df.ROOM_ID,df.ROOM_CAPACITY):
         
-    #         room_model = Room_T(roomID=roomID,roomSize=roomCapacity)
-    #         room_model.save()
+            room_model = Room_T(roomID=roomID,roomSize=roomCapacity)
+            room_model.save()
     
     # Faculty_T
     df = pd.read_excel(filename,usecols=['FACULTY_FULL_NAME'],skiprows=3,nrows=1000) 
@@ -80,13 +80,13 @@ def populate(filename):
         except Exception as e :
             pass
 
-    # CoOfferedCourse_T
-    # df = pd.read_excel(filename,usecols=['COFFER_COURSE_ID','COFFERED_WITH'],skiprows=3,nrows=1000)
-    # for courseID,offeredWith in zip(df.COFFER_COURSE_ID,df.COFFERED_WITH): 
-    #     try:
-    #         course_model = CoOfferedCourse_T(offeredCourseID_id=courseID,coofferredwith=offeredWith)                  
-    #         course_model.save()
-    #     except Exception as e:
-    #         pass
+    CoOfferedCourse_T
+    df = pd.read_excel(filename,usecols=['COFFER_COURSE_ID','COFFERED_WITH'],skiprows=3,nrows=1000)
+    for courseID,offeredWith in zip(df.COFFER_COURSE_ID,df.COFFERED_WITH): 
+        try:
+            course_model = CoOfferedCourse_T(offeredCourseID_id=courseID,coofferredwith=offeredWith)                  
+            course_model.save()
+        except Exception as e:
+            pass
 
 
