@@ -14,23 +14,23 @@ class School_T(models.Model):
 class Department_T(models.Model):
     # DeptID = models.CharField(max_length=6, primary_key=True)
     departmentName = models.CharField(max_length=50,primary_key=True)
-    schoolTitle = models.ForeignKey(School_T, on_delete=models.CASCADE)
+    schoolTitle = models.ForeignKey(School_T,null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self. departmentName
 
 class Course_T(models.Model):
-    courseID = models.CharField(max_length=7, primary_key=True)
+    offeredCourseID = models.CharField(max_length=7, primary_key=True)
     courseName = models.CharField(max_length=100)
     creditHour = models.IntegerField()
     departmentName= models.ForeignKey(Department_T, null=True, on_delete=models.CASCADE)
     schoolTitle = models.ForeignKey(School_T,null=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.courseID
+        return self.offeredCourseID
 
 class CoOfferedCourse_T(models.Model):
-    offeredCourseID = models.ForeignKey(Course_T, on_delete=models.CASCADE, null=True, related_name="OfferedCourseID")
+    offeredCourseID = models.ForeignKey(Course_T, on_delete=models.CASCADE,null=True)
     coofferredwith = models.CharField(max_length=50,default=offeredCourseID)
 
     class Meta:
@@ -45,7 +45,7 @@ class Room_T(models.Model):
         return self.roomID
 
 class Faculty_T(models.Model):
-    facultyID = models.IntegerField(primary_key=True)
+    facultyID = models.CharField(max_length =5,primary_key=True)
     facultyName = models.CharField(max_length=50)
     departmentName = models.ForeignKey(Department_T, null=True, on_delete=models.CASCADE)
 
@@ -55,21 +55,21 @@ class Faculty_T(models.Model):
 class Section_T(models.Model):
     # sectionID = models.CharField(max_length=40, primary_key=True)
     sectionNo = models.IntegerField()
-    courseID = models.ForeignKey(Course_T,null=True,on_delete=models.CASCADE)
+    offeredCourseID = models.ForeignKey(Course_T,null=True,on_delete=models.CASCADE)
     capacity = models.IntegerField(null=True)
     enrolled = models.IntegerField(null=True)
     blocked = models.CharField(max_length=3, null=True) 
     roomID = models.ForeignKey(Room_T, null=True, on_delete=models.CASCADE)
     facultyID = models.ForeignKey(Faculty_T, null=True, on_delete=models.CASCADE)
-    startTime = models.TimeField(null=True)
-    endTime = models.TimeField(null=True)
+    startTime = models.CharField(max_length=10,null=True)
+    endTime = models.CharField(max_length=10,null = True)
     day = models.CharField(max_length=10, null=True)
     semester = models.CharField(max_length=6)
     year = models.IntegerField()
    
 
     class Meta:
-        unique_together = (("courseID","sectionNo","semester", "year"),)
+        unique_together = (("offeredCourseID","sectionNo","semester", "year"),)
 
     def __str__(self):
         return str(self.sectionNo)

@@ -24,8 +24,8 @@ admin.site.register(Faculty_T, Faculty_TAdmin)
 
 
 class Course_TAdmin(admin.ModelAdmin):
-    list_display = ['courseID','courseName','creditHour','departmentName',]
-    search_fields=['courseID','courseName','creditHour','departmentName',]
+    list_display = ['offeredCourseID','courseName','creditHour','departmentName',]
+    search_fields=['offeredCourseID','courseName','creditHour','departmentName',]
 admin.site.register(Course_T, Course_TAdmin)
 
 
@@ -44,9 +44,9 @@ admin.site.register(Room_T, Room_TAdmin)
 
 
 class Section_TAdmin(admin.ModelAdmin):
-    list_display = ['sectionNo','courseID','capacity','enrolled','blocked',
+    list_display = ['sectionNo','offeredCourseID','capacity','enrolled','blocked',
     'roomID','facultyID','startTime','endTime','day','semester','year']
-    search_fields=['sectionNo','courseID','capacity','enrolled','blocked',
+    search_fields=['sectionNo','offeredCourseID','capacity','enrolled','blocked',
     'roomID','facultyID','startTime','endTime','day','semester','year']
 
 admin.site.register(Section_T, Section_TAdmin)
