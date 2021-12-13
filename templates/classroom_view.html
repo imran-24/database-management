@@ -1,0 +1,125 @@
+{% extends 'classroom.html' %}
+{% block content1 %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawChart1);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['1-10',     11],
+          ['11-20',      2],
+          ['21-30',  2],
+          ['31-35', 2],
+          ['36-40',    7],
+          ['41-50',    7],
+          ['51-55',    7],
+          ['56-65',    7]
+        ]);
+
+        var options = {
+          title: 'Class Size 6 Requirements',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+
+      function drawChart1() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['1-10',     11],
+          ['11-20',      2],
+          ['21-30',  2],
+          ['31-35', 2],
+          ['36-40',    7],
+          ['41-50',    7],
+          ['51-55',    7],
+          ['56-65',    7]
+        ]);
+
+        var options = {
+          title: 'Class Size 7 Requirements',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d_'));
+        chart.draw(data, options);
+      }
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+
+<table border="2px" style="margin: auto;" >
+    <!-- <tr>
+        <th>{{ " "}} </th>
+        <th>{{ semester }} {{ year }}</th>
+
+    </tr> -->
+    <tr>
+        <th> Class Size </th>
+        <th> Sections </th>
+        <th> Class room 6</th>
+        <th> Class romm 7</th>
+    </tr>
+    <tr>
+        <th> 1 - 10 </th>
+        {% for a in a1 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> 11 - 20 </th>
+        {% for a in a2 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> 21 - 30 </th>
+        {% for a in a3 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> 31 - 35 </th>
+        {% for a in a4 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> 36 - 40 </th>
+        {% for a in a5 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> 41 - 50 </th>
+        {% for a in a6 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> 51 - 55 </th>
+        {% for a in a7 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> 56 - 65 </th>
+        {% for a in a8 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+
+</table>
+
+
+<div id="piechart_3d" style="width: 700px; height: 300px;"></div>
+<div id="piechart_3d_" style="width: 700px; height: 300px;"></div>
+{% endblock %}

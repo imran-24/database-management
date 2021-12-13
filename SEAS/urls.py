@@ -21,4 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',populations.upload_file),
     path('success/',views.success),
+    path('classroom/',views.classroom),
+    path('classroomTable/',views.classroom_requirement),
 ]

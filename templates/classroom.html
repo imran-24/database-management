@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<div>
+    <form action='/classroomTable/' methor = "POST" >
+        {% csrf_token %}
+        <div><input type="text" placeholder="Year" name='Year'></div> 
+        <div >
+            <select id="list" onchange="getSelectValue();">
+                <option value="summer">Summer<option>
+                <option value="autumn">Autumn</option>
+                <option value="spring">Spring</option>
+            </select> 
+        </div>
+          <div>
+              <input type="submit" value="comfirm">
+          </div>
+    </form>
+</div>
+
+
+{% endblock %}
+
