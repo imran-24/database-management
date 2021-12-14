@@ -1,74 +1,59 @@
 {% extends 'classroom.html' %}
+
 {% block content1 %}
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+      
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
-      google.charts.setOnLoadCallback(drawChart1);
-
+      var data ={{ class6|safe }}
+      
+      class6=[]
+      for (var d in data){
+          class6.push(d)
+          console.log(d);
+       }
+    
+      
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
-          ['1-10',     11],
-          ['11-20',      2],
-          ['21-30',  2],
-          ['31-35', 2],
-          ['36-40',    7],
-          ['41-50',    7],
-          ['51-55',    7],
-          ['56-65',    7]
+          ['Work',     class6[0]],
+          ['Eat',      class6[1]],
+          ['Commute',  class6[2]],
+          ['Watch TV', class6[3]],
+          ['Sleep',    class6[4]]
         ]);
 
         var options = {
-          title: 'Class Size 6 Requirements',
+          title: 'My Daily Activities',
           is3D: true,
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
         chart.draw(data, options);
       }
-
-      function drawChart1() {
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['1-10',     11],
-          ['11-20',      2],
-          ['21-30',  2],
-          ['31-35', 2],
-          ['36-40',    7],
-          ['41-50',    7],
-          ['51-55',    7],
-          ['56-65',    7]
-        ]);
-
-        var options = {
-          title: 'Class Size 7 Requirements',
-          is3D: true,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d_'));
-        chart.draw(data, options);
-      }
-</script>
+    </script>
 
 {% endblock %}
 
-{% block content %}
-
-
-<table border="2px" style="margin: auto;" >
-    <!-- <tr>
+{% block content2 %}
+<table  style="margin: auto;" >
+    <tr bgcolor=red >
         <th>{{ " "}} </th>
         <th>{{ semester }} {{ year }}</th>
+        <th>{{ " "}} </th>
+        <th>{{ " "}} </th>
 
-    </tr> -->
-    <tr>
+    </tr>
+    <tr border="3px">
         <th> Class Size </th>
         <th> Sections </th>
         <th> Class room 6</th>
         <th> Class romm 7</th>
     </tr>
-    <tr>
+    <tr border="1px">
         <th> 1 - 10 </th>
         {% for a in a1 %}
             <td> {{ a }} </td>
@@ -120,6 +105,6 @@
 </table>
 
 
-<div id="piechart_3d" style="width: 700px; height: 300px;"></div>
-<div id="piechart_3d_" style="width: 700px; height: 300px;"></div>
+<div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+
 {% endblock %}

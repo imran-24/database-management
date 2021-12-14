@@ -1,16 +1,18 @@
 from decimal import Context
+import json
 from django.shortcuts import render
 from .raw_sql import *
+from json import dumps
 # Create your views here.
 # from seasapp.ra import classroom_requirement_course_offer
 def success(request):
     return render(request,'success.html',{})
 
 def classroom_requirement(request):
-        if request.method =='POST':
+        if request.method =='GET':
             print('true')
-            semester = request.POST.get('Semester')
-            year = request.POST.get(name = 'Year')
+            semester = request.GET.get('Semester')
+            year = request.GET.get('Year')
             print(semester)
             print(year)
             section = classroom_requirement_course_offer(semester,year)
@@ -44,14 +46,22 @@ def classroom_requirement(request):
             'a6' : a6,
             'a7' : a7,
             'a8' : a8,
-        }
-
-        return render(request,'classroom_view.html',context=context)
+            'year': year,
+            'semester':semester
+           }  
+        context['class6'] = json.dumps(class6)
+        context['class7'] = json.dumps(class7)
+        
+        
+        # print(type(context))
+        # print(context)
+       
+       
+        return render(request,'classroom_view.html',context)
         # print("Not a post method")
         # return render(request,'classroom_view.html',{})
         
 
 def classroom(request):
     return render(request,'classroom.html',{})
-
 

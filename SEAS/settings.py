@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'seasapp',
     'crispy_forms',
+    'django_nvd3',
+   
 ]
 
 MIDDLEWARE = [

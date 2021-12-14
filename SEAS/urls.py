@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path
 
 from seasapp import populations,views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',populations.upload_file),
     path('success/',views.success),
     path('classroom/',views.classroom),
     path('classroomTable/',views.classroom_requirement),
+    # path('pie-chart/',demo_piechart),
 ]

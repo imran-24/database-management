@@ -4,21 +4,24 @@
 
 {% block content %}
 <div>
-    <form action='/classroomTable/' methor = "POST" >
+    <form action='/classroomTable/' methor = "GET" >
         {% csrf_token %}
         <div><input type="text" placeholder="Year" name='Year'></div> 
-        <div >
-            <select id="list" onchange="getSelectValue();">
+          <div >
+            <select id="list" name='Semester'onchange="getSelectValue();">
                 <option value="summer">Summer<option>
                 <option value="autumn">Autumn</option>
                 <option value="spring">Spring</option>
-            </select> 
-        </div>
+            </select>
+          </div>
           <div>
-              <input type="submit" value="comfirm">
+              <button type="submit">comfirm</button>
           </div>
     </form>
 </div>
+{% block content2 %}
+
+{% endblock %}
 
 
 {% endblock %}
