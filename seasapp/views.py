@@ -61,7 +61,43 @@ def classroom_requirement(request):
         # print("Not a post method")
         # return render(request,'classroom_view.html',{})
         
+def resource_usage(request):
+    if request.method =='GET':
+            print('true')
+            semester = request.GET.get('Semester')
+            year = request.GET.get('Year')
+            print(semester)
+            print(year)
+            
+            usage = IUB_resource(semester,year)
+            s = (usage['sections'][0]+usage['sections'][1] + usage['sections'][2]+usage['sections'][3]+usage['sections'][4])
+            e = (usage['enrolled'][0]+usage['enrolled'][1] + usage['enrolled'][2] + usage['enrolled'][3] + usage['enrolled'][4])/5
+            r = (usage['roomcap'][0]+usage['roomcap'][1]+usage['roomcap'][2]+usage['roomcap'][3]+usage['roomcap'][4])/5
+            d = (usage['waste'][0]+usage['waste'][0]+usage['waste'][0]+usage['waste'][0]+usage['waste'][0])/5
+            p = (usage['percent'][4]+usage['percent'][4]+usage['percent'][4]+usage['percent'][4]+usage['percent'][4])/5
+           
+            a1=[s,e,r,d,str(p)+'%']
 
+            a2=[usage['sections'][0],usage['enrolled'][0],usage['roomcap'][0],usage['waste'][0],str(usage['percent'][0])+'%']
+            a3=[usage['sections'][1],usage['enrolled'][1],usage['roomcap'][1],usage['waste'][1],str(usage['percent'][1])+'%']
+            a4=[usage['sections'][2],usage['enrolled'][2],usage['roomcap'][2],usage['waste'][2],str(usage['percent'][2])+'%']
+            a5=[usage['sections'][3],usage['enrolled'][3],usage['roomcap'][3],usage['waste'][3],str(usage['percent'][3])+'%']
+            a6=[usage['sections'][4],usage['enrolled'][4],usage['roomcap'][4],usage['waste'][4],str(usage['percent'][4])+'%']
+            a8=[r,e,d,p]
+            context={
+                'a1':a1,
+                'a2':a2,
+                'a3':a3,
+                'a4':a4,
+                'a5':a5,
+                'a6':a6,
+                'a7':semester,
+                'a8': r,
+                'a9': e,
+                'a10':d,
+                'a11':p
+            }
+            return render(request,'resource_usage.html',context=context)
 def classroom(request):
     return render(request,'classroom.html',{})
 

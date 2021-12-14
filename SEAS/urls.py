@@ -24,5 +24,6 @@ urlpatterns = [
     path('success/',views.success),
     path('classroom/',views.classroom),
     path('classroomTable/',views.classroom_requirement),
+    path('resource_usage/',views.resource_usage),
     # path('pie-chart/',demo_piechart),
 ]
