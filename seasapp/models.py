@@ -31,9 +31,8 @@ class Course_T(models.Model):
 
 class CoOfferedCourse_T(models.Model):
     offeredCourseID = models.ForeignKey(Course_T, on_delete=models.CASCADE,null=True)
-    coofferredwith = models.CharField(max_length=50,default=offeredCourseID)
-
-    class Meta:
+    coofferredwith = models.ForeignKey(Course_T, on_delete=models.CASCADE,null=True)
+    class Meta: 
         unique_together = (("offeredCourseID", "coofferredwith"),)
 
 
