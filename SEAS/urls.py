@@ -25,5 +25,7 @@ urlpatterns = [
     path('classroom/',views.classroom),
     path('classroomTable/',views.classroom_requirement),
     path('resource_usage/',views.resource_usage),
-    # path('pie-chart/',demo_piechart),
+    path('available_resource/',views.available_resource),
+    path('availability_course_offering/',views.Availability_course_offering_comparison),
+    path('enrollment_wise_course_distribution/',views.Enrollment_wise_course_distribution)
 ]

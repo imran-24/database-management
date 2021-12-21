@@ -3,6 +3,7 @@ import json
 from django.shortcuts import render
 from .raw_sql import *
 from json import dumps
+
 # Create your views here.
 # from seasapp.ra import classroom_requirement_course_offer
 def success(request):
@@ -22,12 +23,13 @@ def classroom_requirement(request):
             cls = int(cls/12)
             class6.append(cls) 
         print(class6)
-        
+        print(type(class6))
         class7=[]
         for cls in section:
             cls = int(cls/14)
             class7.append(cls) 
         print(class7)
+        print(type(class7))
         a1 = [ section[0], class6[0], class7[0]]
         a2 = [ section[1], class6[1], class7[1]]
         a3 = [ section[2], class6[2], class7[2]]
@@ -57,10 +59,36 @@ def classroom_requirement(request):
         # print(context)
        
        
-        return render(request,'classroom_view.html',context)
+        return render(request,'classroom_view.html',context=context)
         # print("Not a post method")
         # return render(request,'classroom_view.html',{})
-        
+
+def  classroom_requirement_pie_chart(request):
+        if request.method =='GET':
+            print('true')
+            semester = request.GET.get('Semester')
+            year = request.GET.get('Year')
+            print(semester)
+            print(year)
+            section = classroom_requirement_course_offer(semester,year)
+            print(section)
+            class6=[]
+            for cls in section:
+                cls = int(cls/12)
+                class6.append(cls) 
+            print(class6)
+            
+            class7=[]
+            for cls in section:
+                cls = int(cls/14)
+                class7.append(cls) 
+            print(class7)
+            labels= ['1-10','11-20','21-30','31-35','36-40','41-50','51-55','56-60','60+']
+        return render(request, 'pie_chart.html', {
+        'labels': labels,
+        'data2': class6,
+        })
+
 def resource_usage(request):
     if request.method =='GET':
             print('true')
@@ -69,7 +97,7 @@ def resource_usage(request):
             print(semester)
             print(year)
             
-            usage = IUB_resource(semester,year)
+            usage = IUB_resource_usage(semester,year)
             s = (usage['sections'][0]+usage['sections'][1] + usage['sections'][2]+usage['sections'][3]+usage['sections'][4])
             e = (usage['enrolled'][0]+usage['enrolled'][1] + usage['enrolled'][2] + usage['enrolled'][3] + usage['enrolled'][4])/5
             r = (usage['roomcap'][0]+usage['roomcap'][1]+usage['roomcap'][2]+usage['roomcap'][3]+usage['roomcap'][4])/5
@@ -98,6 +126,211 @@ def resource_usage(request):
                 'a11':p
             }
             return render(request,'resource_usage.html',context=context)
+
+def available_resource(request):
+   
+    if request.method == "GET":
+        s = IUB_Available_resource( )
+        
+
+        a1=[s['room'][0],s['space'][0],s['room'][0]*s['space'][0]]
+        a2=[s['room'][1],s['space'][1],s['room'][1]*s['space'][1]]
+        a3=[s['room'][2],s['space'][2],s['room'][2]*s['space'][2]]
+        a4=[s['room'][3],s['space'][3],s['room'][3]*s['space'][3]]
+        a5=[s['room'][4],s['space'][4],s['room'][4]*s['space'][4]]
+        a6=[s['room'][5],s['space'][5],s['room'][4]*s['space'][4]]
+        # a7=[s['room'][6],s['space'][6],s['room'][6]*s['space'][6]]
+        # a8=[s['room'][7],s['space'][7],s['room'][7]*s['space'][7]]
+        # a9=[s['room'][8],s['space'][8],s['room'][8]*s['space'][8]]
+        # a10=[s['room'][9],s['space'][9],s['room'][9]*s['space'][9]]
+        
+        
+        context={
+            'a1':a1,
+            'a2':a2,
+            'a3':a3,
+            'a4':a4,
+            'a5':a5,
+            'a6':a6,
+            # 'a7':a7,
+            # 'a8':a8,
+            # 'a9':a9,
+            # 'a10':a10
+        }
+        
+    return render(request,'available_resource.html',context)
+
+def Availability_course_offering_comparison(request):
+    if request.method =='GET':
+            semester = request.GET.get('Semester')
+            year = request.GET.get('Year')
+            print(semester)
+            print(year)
+            section = classroom_requirement_course_offer(semester,year)
+            print(section)
+            class6=[]
+            for cls in section:
+                cls = int(cls/12)
+                class6.append(cls) 
+            print('class6')
+            print(class6)
+            cl = 0 
+            for cls in range(len(class6)):
+                cl += class6[cls]
+                 
+            s = IUB_Available_resource()
+            S = 0
+            resource=[]
+            for r in s['space']:
+                resource.append(r)
+                S += r
+
+            b1=s['space'][0]-(class6[0]+class6[1])
+            b2=s['space'][1]-class6[2]
+            b3=s['space'][2]-class6[3]
+            b4=s['space'][3]-class6[4]
+            b5=s['space'][4]-class6[5]
+            b6=s['space'][5]-class6[6]
+            c1=b1 + b2 + b3 + b4  + b5 + b6 
+            dif=[b1,b2,b3,b4,b5,b6]
+            sec=[class6[0]+class6[1],class6[2],class6[3],class6[4],class6[5],class6[6]]
+            a1=[s['room'][0],s['space'][0],class6[0]+class6[1],b1]
+            a2=[s['room'][1],s['space'][1],class6[2],b2]
+            a3=[s['room'][2],s['space'][2],class6[3],b3]
+            a4=[s['room'][3],s['space'][3],class6[4],b4]
+            a5=[s['room'][4],s['space'][4],class6[5],b5]
+            a6=[s['room'][5],s['space'][5],class6[6],b6]
+            a8=[S,cl,c1]
+            # a7=[s['room'][6],s['space'][6],s['room'][6]*s['space'][6],s['space']-class6[7]]
+            # a8=[s['room'][7],s['space'][7],s['room'][7]*s['space'][7],s['space']-class6[8]]
+            # a9=[s['room'][8],s['space'][8],s['room'][8]*s['space'][8],s['space']-class6[9]]
+            # a10=[s['room'][9],s['space'][9],s['room'][9]*s['space'][9],s['space']-class6[10]]
+
+            context={
+            'a1':a1,
+            'a2':a2,
+            'a3':a3,
+            'a4':a4,
+            'a5':a5,
+            'a6':a6,
+            'a7':semester,
+            'a8':a8,
+            # 'a9':a9,
+            # 'a10':a10
+            }
+            context['resource']=json.dumps(resource)
+            print(context['resource'])
+            context['sec']=json.dumps(sec)
+            print(context['sec'])
+            context['dif']=json.dumps(dif)
+            print(context['dif'])
+
+    return render(request,'AvailabilityVScourse_offering.html',context=context)
+
+# def section_based_on_enrollment(request):
+#     if request.method == 'GET':
+#         semester = request.GET.get('Semester')
+#         year = request.GET.get('Year')
+#         SBE = sections_based_on_enrolled(semester,year,'SBE')
+#         SELS = sections_based_on_enrolled(semester,year,'SELS')
+#         SETS = sections_based_on_enrolled(semester,year,'SETS')
+#         SLASS = sections_based_on_enrolled(semester,year,'SLASS')
+#         SPPH = sections_based_on_enrolled(semester,year,'SPPH')
+        
+#         # sec =[]
+#         # for a in range(62):
+#         #     SBE1 =[]
+#         #     s = 0
+#         #     s = a
+#         #     b = s+1
+#         #     print(s)
+#         #     while SBE[a][a] != b:
+#         #         SBE1.append("")
+#         #         b += 1
+#         #     SBE1.append(SBE[a][s+1])
+
+#             #  
+#             # if SELS[s][s] == s+1:
+#             #     list.append(SELS[s][s+1])
+#             # # if SETS[s][s] == s+1:
+#             # #     list.append(SETS[s][s+1])
+#             # if SLASS[s][s] == s+1:
+#             #     list.append(SLASS[s][s+1])
+#             # if SPPH[s][s] == s+1:
+#             #     list.append(SPPH[s][s+1])
+
+#             sec.append(list)
+#         context={
+#             'section':sec,
+#         }
+
+#     return render(request,'section_based_on_enrollment/html',context=context)
+
+def Enrollment_wise_course_distribution(request):
+    if request.method == "GET":
+        print(True)
+        semester = request.GET.get('Semester')
+        print(semester)
+        year = request.GET.get('Year')
+        print(year)
+        sbe=enrollment_wise_course_distribution(semester,year,'SBE')
+        sels=enrollment_wise_course_distribution(semester,year,'SELS')
+        sets=enrollment_wise_course_distribution(semester,year,'SETS')
+        slass=enrollment_wise_course_distribution(semester,year,'SLASS')
+        spph=enrollment_wise_course_distribution(semester,year,'SPPH')
+        print("SBE")
+        print(sbe)
+        # sbe.insert(0,'SBE')
+        # sels.insert(0,'SELS')
+        # sets.insert(0,'SETS')
+        # slass.insert(0,'SLASS')
+        # spph.insert(0,'SPPH')
+        # sbe.insert(0,'41-50')
+        # sbe.insert(0,'51-55')
+        # sbe.insert(0,'56-60')
+        # sbe.insert(0,'1-10')
+        print('SELS')
+        print(sels)
+        print('SETS')
+        print(sets)
+        print('SLASS')
+        print(slass)
+        print('SPPH')
+        print(spph)
+        # title= ['Enrollment','SBE','SELS','SETS','SLASS','SPPH','Total']
+        name = ['1-10','11-20','21-30','31-35','36-40','41-50','51-55','56-60','60+']
+        row = []
+        total=[]
+        for n in range(9):
+            Total = 0
+            a= sbe[n]
+            b= sels[n]
+            c= sets[n]
+            d= slass[n]
+            e= spph[n]
+            # print(a)
+            # print(b)
+            # print(c)
+            # print(d)
+            # print(e)
+            Total = a+b+c+d+e
+            total.append(Total)
+            row.append([name[n],a,b,c,d,e,Total])
+        context = {
+            'row':row,
+            'semester':semester,
+            'name': name
+        }
+        context['sbe_'] = json.dumps(sbe)
+        print('-----')
+        
+        context['sels_'] = json.dumps(sels)
+        context['sets_'] = json.dumps(sets)
+        context['slass_'] = json.dumps(slass)
+        context['spph_'] = json.dumps(spph)
+        
+    return render(request,'enrollment_wise_course_distribution.html',context= context)
+
 def classroom(request):
     return render(request,'classroom.html',{})
 

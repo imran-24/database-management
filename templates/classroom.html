@@ -4,7 +4,7 @@
 
 {% block content %}
 <div>
-    <form action='/resource_usage/' methor = "GET" >
+    <form action='/classroomTable/' methor = "GET" >
         {% csrf_token %}
         <div><input type="text" placeholder="Year" name='Year'></div> 
           <div >
@@ -17,6 +17,49 @@
           <div>
               <button type="submit">comfirm</button>
           </div>
+    </form>
+</div>
+
+<div>
+    <form action='/available_resource/' method="GET">
+        <button type="submit">IUB available resource</button>
+    </form>
+    
+
+</div>
+
+<div>
+
+        <form action='/availability_course_offering/' method="GET">
+            {% csrf_token %}
+            <div><input type="text" placeholder="Year" name='Year'></div> 
+            <div >
+                <select id="list" name='Semester'onchange="getSelectValue();">
+                    <option value="summer">Summer<option>
+                    <option value="autumn">Autumn</option>
+                    <option value="spring">Spring</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit">Availability and course offering comparison</button>
+            </div>
+        </form>
+</div>
+
+<div>
+    <form action='/enrollment_wise_course_distribution/' method="GET">
+        {% csrf_token %}
+        <div><input type="text" placeholder="Year" name='Year'></div> 
+        <div >
+            <select id="list" name='Semester'onchange="getSelectValue();">
+                <option value="summer">Summer<option>
+                <option value="autumn">Autumn</option>
+                <option value="spring">Spring</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">Section based on enrollment in each school</button>
+        </div>
     </form>
 </div>
 {% block content2 %}

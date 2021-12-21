@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2> IUB available resources </h2>
+<table border=2px style="margin: auto;">
+    <tr style="background-color: tomato;">
+        <td> Class size </td>
+        <td> IUB resource </td>
+        <td> Cpacity </td>
+    </tr>
+    <tr>
+        {% for a in a1 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for a in a2 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for a in a3 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for a in a4 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for a in a5 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for a in a6 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr>
+    <!-- <tr>
+        {% for a in a7 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for a in a8 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for a in a9 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for a in a10 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr> -->
+</table>
+
+
+{% endblock %}
