@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'SEAS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'seas_database_02',
+        'NAME': 'seas-database',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',

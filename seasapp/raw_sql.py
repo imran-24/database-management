@@ -75,7 +75,7 @@ def IUB_resource_usage(semester,year):
             COUNT(seasapp_section_t.sectionNo) AS Section,
             SUM(seasapp_room_t.roomSize)
             FROM seasapp_section_t,seasapp_course_t,seasapp_room_t
-            WHERE seasapp_section_t.offeredCourseID_id = seasapp_course_t.offeredCourseID 
+            WHERE seasapp_section_t.courseID_id = seasapp_course_t.courseID 
             AND seasapp_section_t.roomID_id = seasapp_room_t.roomID 
             AND seasapp_section_t.semester=%s
             AND seasapp_section_t.year=%s
@@ -192,7 +192,7 @@ def class_size_based_sections(semester,year):
 #         cursor.execute('''
 #         SELECT seasapp_section_t.enrolled,COUNT(seasapp_section_t.sectionNo) AS Section
 #         FROM seasapp_section_t,seasapp_course_t
-#         WHERE seasapp_section_t.offeredCourseID_id= seasapp_course_t.offeredCourseID 
+#         WHERE seasapp_section_t.courseID_id= seasapp_course_t.courseID 
 #         AND seasapp_section_t.year = %s
 #         AND seasapp_section_t.semester = %s 
 #         AND seasapp_course_t.schoolTitle_id = %s
@@ -211,7 +211,7 @@ def enrollment_wise_course_distribution(semester,year,school):
         cursor.execute('''
         SELECT COUNT(*) AS school
         FROM seasapp_section_t,seasapp_course_t
-        WHERE seasapp_section_t.offeredCourseID_id = seasapp_course_t.offeredCourseID
+        WHERE seasapp_section_t.courseID_id = seasapp_course_t.courseID
         AND seasapp_section_t.enrolled BETWEEN 1 AND 10
         AND semester = %s
         AND year = %s
@@ -219,7 +219,7 @@ def enrollment_wise_course_distribution(semester,year,school):
         UNION ALL
         SELECT COUNT(*) AS school
         FROM seasapp_section_t,seasapp_course_t
-        WHERE seasapp_section_t.offeredCourseID_id = seasapp_course_t.offeredCourseID
+        WHERE seasapp_section_t.courseID_id = seasapp_course_t.courseID
         AND seasapp_section_t.enrolled BETWEEN 11 AND 20
         AND semester = %s
         AND year = %s
@@ -227,7 +227,7 @@ def enrollment_wise_course_distribution(semester,year,school):
         UNION ALL
         SELECT COUNT(*) AS school
         FROM seasapp_section_t,seasapp_course_t
-        WHERE seasapp_section_t.offeredCourseID_id = seasapp_course_t.offeredCourseID
+        WHERE seasapp_section_t.courseID_id = seasapp_course_t.courseID
         AND seasapp_section_t.enrolled BETWEEN 21 AND 30
         AND semester = %s
         AND year = %s
@@ -235,7 +235,7 @@ def enrollment_wise_course_distribution(semester,year,school):
         UNION ALL
         SELECT COUNT(*) AS school
         FROM seasapp_section_t,seasapp_course_t
-        WHERE seasapp_section_t.offeredCourseID_id = seasapp_course_t.offeredCourseID
+        WHERE seasapp_section_t.courseID_id = seasapp_course_t.courseID
         AND seasapp_section_t.enrolled BETWEEN 31 AND 35
         AND semester = %s
         AND year = %s
@@ -243,7 +243,7 @@ def enrollment_wise_course_distribution(semester,year,school):
         UNION ALL
         SELECT COUNT(*) AS school
         FROM seasapp_section_t,seasapp_course_t
-        WHERE seasapp_section_t.offeredCourseID_id = seasapp_course_t.offeredCourseID
+        WHERE seasapp_section_t.courseID_id = seasapp_course_t.courseID
         AND seasapp_section_t.enrolled BETWEEN 36 AND 40
         AND semester = %s
         AND year = %s
@@ -251,7 +251,7 @@ def enrollment_wise_course_distribution(semester,year,school):
         UNION ALL
         SELECT COUNT(*) AS school
         FROM seasapp_section_t,seasapp_course_t
-        WHERE seasapp_section_t.offeredCourseID_id = seasapp_course_t.offeredCourseID
+        WHERE seasapp_section_t.courseID_id = seasapp_course_t.courseID
         AND seasapp_section_t.enrolled BETWEEN 41 AND 50
         AND semester = %s
         AND year = %s
@@ -259,7 +259,7 @@ def enrollment_wise_course_distribution(semester,year,school):
         UNION ALL
         SELECT COUNT(*) AS school
         FROM seasapp_section_t,seasapp_course_t
-        WHERE seasapp_section_t.offeredCourseID_id = seasapp_course_t.offeredCourseID
+        WHERE seasapp_section_t.courseID_id = seasapp_course_t.courseID
         AND seasapp_section_t.enrolled BETWEEN 51 AND 55
         AND semester = %s
         AND year = %s
@@ -267,7 +267,7 @@ def enrollment_wise_course_distribution(semester,year,school):
         UNION ALL
         SELECT COUNT(*) AS school
         FROM seasapp_section_t,seasapp_course_t
-        WHERE seasapp_section_t.offeredCourseID_id = seasapp_course_t.offeredCourseID
+        WHERE seasapp_section_t.courseID_id = seasapp_course_t.courseID
         AND seasapp_section_t.enrolled BETWEEN 56 AND 60
         AND semester = %s
         AND year = %s
@@ -275,7 +275,7 @@ def enrollment_wise_course_distribution(semester,year,school):
         UNION ALL
         SELECT COUNT(*) AS school
         FROM seasapp_section_t,seasapp_course_t
-        WHERE seasapp_section_t.offeredCourseID_id = seasapp_course_t.offeredCourseID
+        WHERE seasapp_section_t.courseID_id = seasapp_course_t.courseID
         AND seasapp_section_t.enrolled BETWEEN 61 AND 100
         AND semester = %s
         AND year = %s

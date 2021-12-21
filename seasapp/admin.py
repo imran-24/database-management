@@ -18,35 +18,32 @@ admin.site.register(Department_T, Department_TAdmin)
 
 class Faculty_TAdmin(admin.ModelAdmin):
     list_display = ['facultyID','facultyName','departmentName',]
-    search_fields=['facultyID','facultyName','departmentName',]
+    
 
 admin.site.register(Faculty_T, Faculty_TAdmin)
 
 
 class Course_TAdmin(admin.ModelAdmin):
-    list_display = ['offeredCourseID','courseName','creditHour','departmentName',]
-    search_fields=['offeredCourseID','courseName','creditHour','departmentName',]
+    list_display = ['courseID','courseName','creditHour','departmentName',]
+    
 admin.site.register(Course_T, Course_TAdmin)
 
 
-class CourseOfferedWith_TAdmin(admin.ModelAdmin):
-    list_dislay =['offeredCourseID','coofferredwith',]
-    search_fields=['offeredCourseID','coofferredwith']
+class OfferedWith_TAdmin(admin.ModelAdmin):
+    list_dislay =['courseID','offerredWith',]
+    
 
-admin.site.register(CoOfferedCourse_T,CourseOfferedWith_TAdmin)
+admin.site.register(OfferedCourse_T,OfferedWith_TAdmin)
 
 class Room_TAdmin(admin.ModelAdmin):
     list_display = ['roomID','roomSize']
-    search_fields= ['roomID','roomSize']
-
+    
 admin.site.register(Room_T, Room_TAdmin)
 
 
 
 class Section_TAdmin(admin.ModelAdmin):
-    list_display = ['sectionNo','offeredCourseID','capacity','enrolled','blocked',
+    list_display = ['sectionNo','courseID','capacity','enrolled','blocked',
     'roomID','facultyID','startTime','endTime','day','semester','year']
-    search_fields=['sectionNo','offeredCourseID','capacity','enrolled','blocked',
-    'roomID','facultyID','startTime','endTime','day','semester','year']
-
+    
 admin.site.register(Section_T, Section_TAdmin)
