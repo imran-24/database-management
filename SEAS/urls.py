@@ -24,13 +24,27 @@ from seasapp import populations,views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',populations.upload_file),
+    path('home/',views.home,name='home'),
     path('success/',views.success),
-    path('classroom/',views.classroom,name='seas-home'),
+
+    path('classroom/',views.classroom,name='classroom'),
     path('classroomTable/',views.classroom_requirement),
-    path('resource_usage/',views.resource_usage),
-    path('available_resource/',views.available_resource),
-    path('availability_course_offering/',views.Availability_course_offering_comparison),
-    path('enrollment_wise_course_distribution/',views.Enrollment_wise_course_distribution),
+
+    path('course_distribution/',views.course_distribution,name='course_distribution'),
+    path('course_distribution_view/',views.Enrollment_wise_course_distribution),
+   
+    path('resource_usage/',views.resource_usage,name='resource_usage'),
+    path('resource_usage_view/',views.usage_of_resource),
+
+    path('available_resource/',views.available_resource,name='available_resource'),
+
+    path('availability_course_offering/',views.Availability_course_offering,name='availability_course_offering'),
+    path('availability_course_offering_view/',views.Availability_course_offering_comparison),
+
+    path('revenue/',views.IUB_revenues,name='revenue'),
+    path('revenue_view/',views.revenue_of_IUB),
+   
+    
     path('register/',user_views.register,name='register'),
     path('profile/',user_views.profile,name='profile'),
     path('login/', auth_views. LoginView.as_view(template_name='users/login.html'), name='login'),

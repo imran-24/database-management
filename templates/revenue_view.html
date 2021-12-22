@@ -1,0 +1,33 @@
+{% extends 'revenue.html' %}
+
+{% block content1 %}
+
+
+
+{% endblock %}
+
+{% block content2 %}
+
+<table border = 2px style="margin: auto;width: 600px;">
+
+    <tr>
+        <th>{{" "}}</th>
+        <td>SBE</td>
+        <td>SELS</td>
+        <td>SETS</td>
+        <td>SLASS</td>
+        <td>SPPH</td>
+        <td>Total</td>
+    </tr>
+    {% for tr in revenue %}
+        <tr>
+           
+                {% for td in tr %}
+                    <td> {{ td }}</td>
+                {% endfor %}
+          
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

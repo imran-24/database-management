@@ -289,3 +289,21 @@ def enrollment_wise_course_distribution(semester,year,school):
             print(sec)
             enrolled.append(sec) 
         return enrolled
+
+def IUB_revenue(semester,year,school):
+    with connection.cursor() as cursor:
+       
+        cursor.execute('''
+        SELECT SUM(seasapp_course_t.creditHour*seasapp_section_t.enrolled)
+        FROM seasapp_section_t,seasapp_course_t
+        WHERE seasapp_section_t.courseID_id = seasapp_course_t.courseID
+        AND seasapp_section_t.semester= %s
+        AND seasapp_section_t.year= %s
+        AND seasapp_course_t.schoolTitle_id= %s
+        ''',[semester,year,school])
+        ro = cursor.fetchall()
+        print(ro)
+        r = (ro[0])
+        print(r)
+           
+        return r

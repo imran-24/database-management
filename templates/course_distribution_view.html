@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'course_distribution.html' %}
 
 {% block content1 %}
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -64,9 +64,9 @@
     //    -->
 {% endblock %}
 
-{% block content %}
-<h2>Enrolment wise course distribution among the schools</h2>
-<table border = 2px style="margin: auto;">
+{% block content2 %}
+
+<table border = 2px style="margin: auto;width: 600px;">
     <tr >
         <th align="center" colspan="7">{{ semester }}</th>
     </tr>

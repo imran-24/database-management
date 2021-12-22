@@ -1,0 +1,82 @@
+{% extends 'resource_usage.html' %}
+
+{% block content2 %}
+<table border=2px style="margin: auto;" >
+    
+    <tr >
+        <th> {{" "}}</th>
+        <th> Sum </th>
+        <th> Avg Enroll</th>
+        <th> Avg Room</th>
+        <th> Difference</th>
+        <th> Unused%</th>
+    </tr>
+    <tr >
+        <th>{{ a7 }} </th>
+        {% for a in a1 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th>SBE  </th>
+       
+        {% for a in a2 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> SELS </th>
+        {% for a in a3 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> SETS </th>
+        {% for a in a4 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> SLASS </th>
+        {% for a in a5 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> SPPH </th>
+        {% for a in a6 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+   
+</table>
+
+<div style="margin-top: 50px;">
+    <table border=2px style="margin: auto;">
+        <tr>
+            <td>{{" "}}</td>
+            <th>{{a7}}</th>
+        </tr>
+        <tr>
+            <th>Average of Room_CAPACITY</th>
+            <td>{{a8}}</td>
+        </tr>
+        <tr>
+            <th>Average of ENROLLED</th>
+            <td>{{a9}}</td>
+        </tr>
+        <tr>
+            <th>Average of Unused Space</th>
+            <td>{{a10}}</td>
+        </tr>
+        <tr>
+            <th>Unused Percent</th>
+            <td>{{a11}}</td>
+        </tr>
+    
+    </table>
+    
+</div>
+
+
+{% endblock %}
