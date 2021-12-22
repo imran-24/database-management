@@ -50,9 +50,9 @@ body {
   }
   
   .article-img {
-    height: 65px;
-    width: 65px;
-    margin-right: 16px;
+    height: 35px;
+    width: 35px;
+    margin-left: 10px;
   }
   
   .article-metadata {
