@@ -22,7 +22,7 @@ class Department_T(models.Model):
 class Course_T(models.Model):
     courseID = models.CharField(max_length=7, primary_key=True)
     courseName = models.CharField(max_length=100)
-    creditHour = models.IntegerField()
+    creditHour = models.IntegerField(null=True)
     departmentName= models.ForeignKey(Department_T, null=True, on_delete=models.CASCADE)
     schoolTitle = models.ForeignKey(School_T,null=True, on_delete=models.CASCADE)
 

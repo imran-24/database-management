@@ -302,8 +302,29 @@ def IUB_revenue(semester,year,school):
         AND seasapp_course_t.schoolTitle_id= %s
         ''',[semester,year,school])
         ro = cursor.fetchall()
-        print(ro)
-        r = (ro[0])
-        print(r)
+       
+        r = (ro[0][0])
+        
+           
+        return r
+
+
+def engineering_school_revenue(semester,year,dept):
+    with connection.cursor() as cursor:
+       
+        cursor.execute('''
+        SELECT SUM(seasapp_course_t.creditHour*seasapp_section_t.enrolled)
+        FROM seasapp_section_t,seasapp_course_t,seasapp_department_t
+        WHERE seasapp_section_t.courseID_id = seasapp_course_t.courseID
+        AND seasapp_course_t.departmentName_id = 	seasapp_department_t.departmentName
+        AND seasapp_section_t.semester= %s
+        AND seasapp_section_t.year=%s
+        AND seasapp_course_t.schoolTitle_id= "SETS"          
+		AND seasapp_department_t.departmentName=%s
+        ''',[semester,year,dept])
+        ro = cursor.fetchall()
+       
+        r = (ro[0][0])
+        
            
         return r

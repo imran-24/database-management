@@ -2,7 +2,7 @@ from decimal import Context
 import json
 from django.shortcuts import render
 
-from seasapp.models import School_T
+from seasapp.models import Department_T, School_T
 from .raw_sql import *
 from json import dumps
 
@@ -311,39 +311,108 @@ def Enrollment_wise_course_distribution(request):
 
 def revenue_of_IUB(request):
     if request.method == "POST":
-        print(True)
+        
         FromYear = request.POST.get('YearF')
-        print(FromYear)
+        
         ToYear = request.POST.get('YearT')
-        print(ToYear)
+        
         
         School=[]
-        rows=[]
-        
+       
         semester=["Spring",'Summer','Autumn']
         school = School_T.objects.all()
+        rows=[]
+        total=[]
         while int(FromYear) <= int(ToYear) :
-            sum = 0
-            i = 0
+            i = 0 
+            
             for i in range(len(semester)):
                 j = 0
-                scl = str(FromYear)+str(i)+semester[i]
+                sum = 0
+                School=[]
+                
+                scl = str(FromYear)+str(i+1)+semester[i]
                 School.append(scl)
+
                 for j in range(len(school)):
-                    num = School.append(enrollment_wise_course_distribution(semester[i],FromYear,school[j]))
+                    num = IUB_revenue(semester[i],FromYear,school[j])
+                     
+                    School.append(num)
                     if num is None:
                         pass 
                     else: 
-                        sum += num
-                School.append(sum)
-                rows.append(School)
-                print(rows)
-                FromYear = int(FromYear) + 1
+                        sum += num 
+                         
+                if sum == 0: 
+                    School.clear()
+                else:
+                    total.append(sum)
+                    School.append(sum)
+                    rows.append(School)  
+               
+            FromYear = int(FromYear) + 1
+        i = 0
+        changes=[]
+        for i in range(len(total)):
+            try:
+                num = ((total[i+3]-total[i])*100)/total[i+3]
+                rows[i+3].append(str(int(num))+"%")
+            except:
+                pass
+    context={
+           'revenue': rows
+         }
+    return render(request,'revenue_view.html',context= context)
 
-                context={
-                    'revenue': rows
-                }
-        return render(request,'revenue_view.html',context= context)
+
+def revenue_in_engineering_school(request):
+
+    if request.method == "POST":
+        
+        FromYear = request.POST.get('YearF')
+        
+        ToYear = request.POST.get('YearT')
+        
+        School=[]
+       
+        semester=["Spring",'Summer','Autumn']
+        dept = Department_T.objects.all()
+        rows=[]
+        while int(FromYear) <= int(ToYear) :
+            i = 0 
+
+            for i in range(len(semester)):
+                j = 0
+                sum = 0  
+                School=[]
+                
+                scl = str(FromYear)+str(i+1)+semester[i]
+                School.append(scl)
+               
+                for j in range(len(dept)):
+                    num = engineering_school_revenue(semester[i],FromYear,dept[j])
+                    
+                    School.append(num)
+                    if num is None:
+                        pass 
+                    else: 
+                        sum += num  
+                if sum == 0: 
+                    School.clear()
+                else:
+                    School.append(sum)
+                    print(School)
+                    rows.append(School)  
+               
+            FromYear = int(FromYear) + 1
+           
+    
+    
+    context={
+           'revenue': rows
+         }
+    return render(request,'revenue_in_engineering_school_view.html',context=context)
+
 
 def classroom(request):
     return render(request,'classroom.html',{})
@@ -357,6 +426,9 @@ def resource_usage(request):
 def Availability_course_offering(request):
     return render(request,'AvailabilityVScourse_offering.html',{})
 
-
 def IUB_revenues(request):
     return render(request,'revenue.html',{})
+
+def engineering_school(request):
+    return render(request,'revenue_in_engineering_school.html',{})
+

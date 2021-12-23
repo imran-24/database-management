@@ -43,6 +43,10 @@ urlpatterns = [
 
     path('revenue/',views.IUB_revenues,name='revenue'),
     path('revenue_view/',views.revenue_of_IUB),
+
+    path('engineering_school_revenue/',views.engineering_school,name='engineering_school'),
+    path('engineering_school_revenue_view/',views.revenue_in_engineering_school),
+    
    
     
     path('register/',user_views.register,name='register'),

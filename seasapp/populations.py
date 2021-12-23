@@ -1,3 +1,4 @@
+from io import DEFAULT_BUFFER_SIZE
 from os import execlp
 from django.db.models.fields import NullBooleanField
 from django.http import HttpResponseRedirect
@@ -32,16 +33,31 @@ def populate(filename):
         except Exception as e:
             pass
 
+    
+    # Department_T
+    df = pd.read_excel(filename,usecols=['Dept','SCHOOL_TITLE'])
+    school=["SBE","SETS","SELS","SLASS","SPPH"]
+    for dept,schoolTitle in  zip(df.Dept,df.SCHOOL_TITLE):
+        try:
+            if dept  in school:
+                continue
+            else:
+                schoolTitle = School_T.objects.filter(schoolTitle=schoolTitle).first()
+                Department_model = Department_T(departmentName=dept,schoolTitle=schoolTitle)
+                Department_model.save()
+        except Exception as e:
+            pass  
     # Course_T
     file= filename.name
-    df = pd.read_excel(filename,usecols=['COFFER_COURSE_ID','COURSE_NAME','CREDIT_HOUR','SCHOOL_TITLE'])
-    for courseID,courseName,creditHour,schoolTitle in zip(df.COFFER_COURSE_ID,df.COURSE_NAME,df.CREDIT_HOUR,
-                            df.SCHOOL_TITLE): 
+    df = pd.read_excel(filename,usecols=['COFFER_COURSE_ID','COURSE_NAME','CREDIT_HOUR','SCHOOL_TITLE',"Dept"])
+    for courseID,courseName,creditHour,schoolTitle,dept in zip(df.COFFER_COURSE_ID,df.COURSE_NAME,df.CREDIT_HOUR,
+                            df.SCHOOL_TITLE,df.Dept): 
             
             schoolTitle = School_T.objects.filter(schoolTitle=schoolTitle).first()
+            dept =Department_T.objects.filter(departmentName=dept).first()
             print(schoolTitle)
             course_model = Course_T(courseID=courseID,courseName=courseName,
-                                    creditHour=creditHour,schoolTitle=schoolTitle)
+                                    creditHour=creditHour,schoolTitle=schoolTitle,departmentName=dept)
                                          
             course_model.save()
             # except Exception as e:
@@ -92,22 +108,7 @@ def populate(filename):
                 section_model.save()
             
            
-              
 
-        
-    # Department_T
-    df = pd.read_excel(filename,usecols=['Dept','SCHOOL_TITLE'])
-    school=["SBE","SETS","SELS","SLASS","SPPH"]
-    for dept,schoolTitle in  zip(df.Dept,df.SCHOOL_TITLE):
-        try:
-            if dept  in school:
-                continue
-            else:
-                schoolTitle = School_T.objects.filter(schoolTitle=schoolTitle).first()
-                Department_model = Department_T(departmentName=dept,schoolTitle=schoolTitle)
-                Department_model.save()
-        except Exception as e:
-            pass  
 
 
     # OfferedCourse_T
