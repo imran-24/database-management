@@ -1,5 +1,6 @@
 from decimal import Context
 import json
+import simplejson as json
 from django.shortcuts import render
 
 from seasapp.models import Department_T, School_T
@@ -352,16 +353,40 @@ def revenue_of_IUB(request):
                
             FromYear = int(FromYear) + 1
         i = 0
-        changes=[]
+        change=[]
         for i in range(len(total)):
             try:
                 num = ((total[i+3]-total[i])*100)/total[i+3]
+                change.append(num)
                 rows[i+3].append(str(int(num))+"%")
             except:
                 pass
-    context={
-           'revenue': rows
-         }
+        
+        SBE=[]
+        SETS=[]
+        SELS=[]
+        SLASS=[]
+        SPPH=[]
+        title=[]
+        i =0
+        for i in range(len(rows)):
+            title.append(rows[i][0])
+            SBE.append(rows[i][1])
+            SETS.append(rows[i][2])
+            SELS.append(rows[i][3])
+            SLASS.append(rows[i][4])
+            SPPH.append(rows[i][5])
+
+        context={
+            'revenue': rows
+            }
+        context['sbe'] = json.dumps(SBE)
+        context['sels'] = json.dumps(SELS)
+        context['sets'] = json.dumps(SETS)
+        context['slass'] = json.dumps(SLASS)
+        context['spph'] = json.dumps(SPPH)
+        context['title'] = json.dumps(title)
+        context['changes'] = json.dumps(change)
     return render(request,'revenue_view.html',context= context)
 
 
@@ -405,7 +430,15 @@ def revenue_in_engineering_school(request):
                     rows.append(School)  
                
             FromYear = int(FromYear) + 1
-           
+        i = 0
+        j = 0
+        for i in range(len(rows)):
+            for j in range(len(rows[i])):
+                try:
+                    num = ((rows[i+3][j]-rows[i][j])*100)/rows[i+3][j]
+                    rows[i+3].append(str(int(num))+"%")
+                except:
+                    pass   
     
     
     context={
