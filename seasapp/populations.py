@@ -13,10 +13,11 @@ def upload_file(request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             file = request.FILES['file']
-            instance = ModelWithFileField(file_field=file)
-            instance.save()
-            populate(file)
-            return redirect('/success/')
+            if 'xlsx' in file:
+                instance = ModelWithFileField(file_field=file)
+                instance.save()
+                populate(file)
+                return redirect('/success/')
     else:
         form = UploadFileForm()
     return render(request, 'upload.html', {'form': form})
@@ -55,14 +56,14 @@ def populate(filename):
             
             schoolTitle = School_T.objects.filter(schoolTitle=schoolTitle).first()
             dept =Department_T.objects.filter(departmentName=dept).first()
-            print(schoolTitle)
-            course_model = Course_T(courseID=courseID,courseName=courseName,
-                                    creditHour=creditHour,schoolTitle=schoolTitle,departmentName=dept)
-                                         
-            course_model.save()
-            # except Exception as e:
-            #     pass
-               
+            try:
+                course_model = Course_T(courseID=courseID,courseName=courseName,
+                                        creditHour=creditHour,schoolTitle=schoolTitle,departmentName=dept)
+                                            
+                course_model.save()
+            except Exception as E:
+                pass
+            
 
     # Room_T
     df = pd.read_excel(filename,usecols=['ROOM_ID',"ROOM_CAPACITY"])
@@ -81,13 +82,7 @@ def populate(filename):
         if 'TBA' not in name:
             Faculty_model = Faculty_T(facultyID=id,facultyName=name)
             Faculty_model.save()
-            print(id)
-            print(name)
-        
-        print(i)
-        i += 1
-        # except Exception as e:
-        #     pass
+           
 
     # Section_T
     df = pd.read_excel(filename,usecols=['COFFER_COURSE_ID','SECTION','ENROLLED','ROOM_ID','BLOCKED','FACULTY_FULL_NAME','STRAT_TIME','END_TIME','ST_MW','CAPACITY','Semester','Year']) 
@@ -97,16 +92,16 @@ def populate(filename):
     i = 2
     for courseID,section,enrolled,roomid,blocked,faculty,start,end,day,capacity,semester,y in zip(df.COFFER_COURSE_ID,df.SECTION,df.ENROLLED,df.ROOM_ID,df.BLOCKED,df.FACULTY_FULL_NAME,df.STRAT_TIME,df.END_TIME,df.ST_MW,df.CAPACITY,df.Semester,df.Year):
                 courseID = Course_T.objects.filter(courseID= courseID).first()
-                print(courseID)
-                print(i)
                 
                 i += 1
                 (id,name)= faculty.split('-',1)
                 facultyID = Faculty_T.objects.filter(facultyID=id).first()
                 roomid = Room_T.objects.filter(roomID= roomid).first()
-                section_model=Section_T(sectionNo=section,courseID=courseID,enrolled = enrolled,roomID = roomid,blocked = blocked,facultyID= facultyID,startTime = start,endTime = end ,day= day,capacity = capacity,semester=semester,year=y)
-                section_model.save()
-            
+                try:
+                    section_model=Section_T(sectionNo=section,courseID=courseID,enrolled = enrolled,roomID = roomid,blocked = blocked,facultyID= facultyID,startTime = start,endTime = end ,day= day,capacity = capacity,semester=semester,year=y)
+                    section_model.save()
+                except Exception as e :
+                    pass
            
 
 
@@ -116,7 +111,7 @@ def populate(filename):
     for courseID,offeredWith in zip(df.COFFER_COURSE_ID,df.COFFERED_WITH): 
        
             courseID = Course_T.objects.filter(courseID=courseID).first()
-            print(courseID)
+           
             try:
                 offeredWith = Course_T.objects.filter(courseID=offeredWith).first()
                 course_model = OfferedCourse_T(courseID=courseID,offeredWith=offeredWith) 

@@ -1,9 +1,9 @@
 {% extends 'resource_usage.html' %}
 
 {% block content2 %}
-<table border=2px style="margin: auto;" >
+<table border=2px style="margin: auto;background-color: rgb(255, 202, 122)" >
     
-    <tr >
+    <tr style="background-color:rgb(255, 94, 0)">
         <th> {{" "}}</th>
         <th> Sum </th>
         <th> Avg Enroll</th>
@@ -52,10 +52,10 @@
 </table>
 
 <div style="margin-top: 50px;">
-    <table border=2px style="margin: auto;">
-        <tr>
-            <td>{{" "}}</td>
-            <th>{{a7}}</th>
+    <table border=2px style="margin: auto;background-color: rgb(255, 202, 122)">
+        <tr>  
+            <th style="background-color:rgb(255, 94, 0)">{{" "}}</th>
+            <th style="background-color:rgb(255, 94, 0)">{{a7}}</th>
         </tr>
         <tr>
             <th>Average of Room_CAPACITY</th>
@@ -71,7 +71,7 @@
         </tr>
         <tr>
             <th>Unused Percent</th>
-            <td>{{a11}}</td>
+            <td>{{a11}} %</td>
         </tr>
     
     </table>

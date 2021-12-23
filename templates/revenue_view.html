@@ -230,8 +230,8 @@ function drawChart() {
 
         var options = {
             chart: {
-            title: 'Company Performance',
-            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+            title: 'IUB Revenue and Changes %',
+            subtitle: '',
             }
         };
 
@@ -248,9 +248,9 @@ function drawChart() {
 
 {% block content2 %}
 
-<table border = 2px style="margin: auto;width: 600px;">
+<table border = 2px style="margin: auto;width: 600px;background-color: rgb(216, 210, 210)">
    
-    <tr>
+    <tr style="background-color:rgb(8, 226, 255);">
         <th>{{" "}}</th>
         <td>SBE</td>
         <td>SELS</td>
@@ -276,7 +276,7 @@ function drawChart() {
 </table>
 <div style="margin-top: 20px;">
     <div id="line_top_x" style="margin-top: 10px;margin: auto;"></div>
-    <div id="chart_div" style="width: 250%; height: 700px;margin-top: 10px;margin-left: -130px;"></div>
+    <div id="chart_div" style="width: 200%; height: 700px;margin-top: 10px;margin-left: -130px;"></div>
     <div><div id="columnchart_material" style="width: 800px; height: 500px;margin: auto;"></div></div>
 </div>
 

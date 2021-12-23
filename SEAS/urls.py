@@ -23,7 +23,7 @@ from seasapp import populations,views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',populations.upload_file),
+    path('update/',populations.upload_file,name='update'),
     path('home/',views.home,name='home'),
     path('success/',views.success),
 

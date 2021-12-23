@@ -20,22 +20,25 @@ def classroom_requirement(request):
             print('true')
             semester = request.POST.get('Semester')
             year = request.POST.get('Year')
-            print(semester)
-            print(year)
             section = classroom_requirement_course_offer(semester,year)
-            print(section)
+           
         class6=[]
+        sum6=0
+        sumsec = 0
         for cls in section:
+            sumsec += cls
             cls = int(cls/12)
+            sum6 += cls
             class6.append(cls) 
-        print(class6)
-        print(type(class6))
+       
+        sum7=0
         class7=[]
         for cls in section:
             cls = int(cls/14)
+            sum7 += cls
             class7.append(cls) 
-        print(class7)
-        print(type(class7))
+
+        
         a1 = [ section[0], class6[0], class7[0]]
         a2 = [ section[1], class6[1], class7[1]]
         a3 = [ section[2], class6[2], class7[2]]
@@ -44,6 +47,7 @@ def classroom_requirement(request):
         a6 = [ section[5], class6[5], class7[5]]
         a7 = [ section[6], class6[6], class7[6]]
         a8 = [ section[7], class6[7], class7[7]]
+        a9 = [ sumsec, sum6, sum7 ]
 
         context= {
             'a1' : a1,
@@ -54,6 +58,7 @@ def classroom_requirement(request):
             'a6' : a6,
             'a7' : a7,
             'a8' : a8,
+            'a9' : a9,
             'year': year,
             'semester':semester
            }  
@@ -70,11 +75,10 @@ def classroom_requirement(request):
 
 def usage_of_resource(request):
     if request.method =='POST':
-            print('true')
+            
             semester = request.POST.get('Semester')
             year = request.POST.get('Year')
-            print(semester)
-            print(year)
+           
             
             usage = IUB_resource_usage(semester,year)
             s = (usage['sections'][0]+usage['sections'][1] + usage['sections'][2]+usage['sections'][3]+usage['sections'][4])
@@ -118,11 +122,7 @@ def available_resource(request):
         a4=[s['room'][3],s['space'][3],s['room'][3]*s['space'][3]]
         a5=[s['room'][4],s['space'][4],s['room'][4]*s['space'][4]]
         a6=[s['room'][5],s['space'][5],s['room'][4]*s['space'][4]]
-        # a7=[s['room'][6],s['space'][6],s['room'][6]*s['space'][6]]
-        # a8=[s['room'][7],s['space'][7],s['room'][7]*s['space'][7]]
-        # a9=[s['room'][8],s['space'][8],s['room'][8]*s['space'][8]]
-        # a10=[s['room'][9],s['space'][9],s['room'][9]*s['space'][9]]
-        
+       
         
         context={
             'a1':a1,
@@ -131,10 +131,7 @@ def available_resource(request):
             'a4':a4,
             'a5':a5,
             'a6':a6,
-            # 'a7':a7,
-            # 'a8':a8,
-            # 'a9':a9,
-            # 'a10':a10
+            
         }
         
     return render(request,'available_resource.html',context)
@@ -143,16 +140,14 @@ def Availability_course_offering_comparison(request):
     if request.method =='POST':
             semester = request.POST.get('Semester')
             year = request.POST.get('Year')
-            print(semester)
-            print(year)
+           
             section = classroom_requirement_course_offer(semester,year)
-            print(section)
+           
             class6=[]
             for cls in section:
                 cls = int(cls/12)
                 class6.append(cls) 
-            print('class6')
-            print(class6)
+            
             cl = 0 
             for cls in range(len(class6)):
                 cl += class6[cls]
@@ -180,11 +175,7 @@ def Availability_course_offering_comparison(request):
             a5=[s['room'][4],s['space'][4],class6[5],b5]
             a6=[s['room'][5],s['space'][5],class6[6],b6]
             a8=[S,cl,c1]
-            # a7=[s['room'][6],s['space'][6],s['room'][6]*s['space'][6],s['space']-class6[7]]
-            # a8=[s['room'][7],s['space'][7],s['room'][7]*s['space'][7],s['space']-class6[8]]
-            # a9=[s['room'][8],s['space'][8],s['room'][8]*s['space'][8],s['space']-class6[9]]
-            # a10=[s['room'][9],s['space'][9],s['room'][9]*s['space'][9],s['space']-class6[10]]
-
+            
             context={
             'a1':a1,
             'a2':a2,
@@ -194,8 +185,7 @@ def Availability_course_offering_comparison(request):
             'a6':a6,
             'a7':semester,
             'a8':a8,
-            # 'a9':a9,
-            # 'a10':a10
+            
             }
             context['resource']=json.dumps(resource)
             print(context['resource'])
@@ -247,36 +237,15 @@ def Availability_course_offering_comparison(request):
 
 def Enrollment_wise_course_distribution(request):
     if request.method == "POST":
-        print(True)
         semester = request.POST.get('Semester')
-        print(semester)
         year = request.POST.get('Year')
-        print(year)
+        
         sbe=enrollment_wise_course_distribution(semester,year,'SBE')
         sels=enrollment_wise_course_distribution(semester,year,'SELS')
         sets=enrollment_wise_course_distribution(semester,year,'SETS')
         slass=enrollment_wise_course_distribution(semester,year,'SLASS')
         spph=enrollment_wise_course_distribution(semester,year,'SPPH')
-        print("SBE")
-        print(sbe)
-        # sbe.insert(0,'SBE')
-        # sels.insert(0,'SELS')
-        # sets.insert(0,'SETS')
-        # slass.insert(0,'SLASS')
-        # spph.insert(0,'SPPH')
-        # sbe.insert(0,'41-50')
-        # sbe.insert(0,'51-55')
-        # sbe.insert(0,'56-60')
-        # sbe.insert(0,'1-10')
-        print('SELS')
-        print(sels)
-        print('SETS')
-        print(sets)
-        print('SLASS')
-        print(slass)
-        print('SPPH')
-        print(spph)
-        # title= ['Enrollment','SBE','SELS','SETS','SLASS','SPPH','Total']
+      
         name = ['1-10','11-20','21-30','31-35','36-40','41-50','51-55','56-60','60+']
         row = []
         total=[]
@@ -301,7 +270,7 @@ def Enrollment_wise_course_distribution(request):
             'name': name
         }
         context['sbe_'] = json.dumps(sbe)
-        print('-----')
+        
         
         context['sels_'] = json.dumps(sels)
         context['sets_'] = json.dumps(sets)
@@ -467,7 +436,7 @@ def revenue_in_engineering_school(request):
         context['cse'] = json.dumps(cse)
         context['eee'] = json.dumps(eee)
         context['title'] = json.dumps(title)
-        # context['changes'] = json.dumps(change)
+        
 
 
 

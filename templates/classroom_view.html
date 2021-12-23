@@ -24,7 +24,8 @@
           ['36-40', data[4]],
           ['41-50', data[5]],
           ['51-55', data[6]],
-          ['56-65', data[3]],
+          ['56-65', data[7]],
+         
         ]);
 
         var options = {
@@ -55,7 +56,8 @@
           ['36-40', data[4]],
           ['41-50', data[5]],
           ['51-55', data[6]],
-          ['56-65', data[3]],
+          ['56-65', data[7]],
+         
         ]);
 
         var options = {
@@ -73,13 +75,10 @@
 {% endblock %}
 
 {% block content2 %}
-<table  style="margin: auto;margin-left: 300px;" border="2px">
+<table  style="margin: auto;margin-left: 300px;background-color: rgb(255, 202, 122)" border="2px">
     <tr bgcolor=red >
-        <th>{{ " "}} </th>
-        <th>{{ semester }} {{ year }}</th>
-        <th>{{ " "}} </th>
-        <th>{{ " "}} </th>
-
+      <th style="text-align: center; background-color:rgb(255, 94, 0)"   colspan="4">{{ semester }} {{ year }}</th>
+        
     </tr>
     <tr border="3px">
         <th> Class Size </th>
@@ -135,6 +134,13 @@
             <td> {{ a }} </td>
         {% endfor %} 
     </tr> 
+
+    <tr>
+      <th> Total </th>
+      {% for a in a9 %}
+          <td> {{ a }} </td>
+      {% endfor %} 
+  </tr> 
 
 </table>
 
