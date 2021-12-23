@@ -426,24 +426,51 @@ def revenue_in_engineering_school(request):
                     School.clear()
                 else:
                     School.append(sum)
-                    print(School)
                     rows.append(School)  
                
             FromYear = int(FromYear) + 1
         i = 0
         j = 0
+        cse=[]
+        eee=[]
         for i in range(len(rows)):
             for j in range(len(rows[i])):
                 try:
                     num = ((rows[i+3][j]-rows[i][j])*100)/rows[i+3][j]
                     rows[i+3].append(str(int(num))+"%")
+                    if j == 1:
+                        cse.append(int(num))
+                    if j == 2:
+                        eee.append(int(num))
                 except:
                     pass   
+      
+        CSE=[]
+        EEE=[]
+        PS=[]
+        title=[]
+        i =0
+        for i in range(len(rows)):
+            title.append(rows[i][0])
+            CSE.append(rows[i][1])
+            EEE.append(rows[i][2])
+            PS.append(rows[i][3])
+            
+
     
-    
-    context={
-           'revenue': rows
-         }
+        context={
+            'revenue': rows
+            }
+        context['sbe'] = json.dumps(CSE)
+        context['sels'] = json.dumps(EEE)
+        context['sets'] = json.dumps(PS)
+        context['cse'] = json.dumps(cse)
+        context['eee'] = json.dumps(eee)
+        context['title'] = json.dumps(title)
+        # context['changes'] = json.dumps(change)
+
+
+
     return render(request,'revenue_in_engineering_school_view.html',context=context)
 
 
