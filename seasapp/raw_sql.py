@@ -186,23 +186,6 @@ def class_size_based_sections(semester,year):
             sections.append(sec) 
         return sections 
 
-
-# def sections_based_on_enrolled(semester,year,school):
-#     with connection.cursor() as cursor:
-#         cursor.execute('''
-#         SELECT seasapp_section_t.enrolled,COUNT(seasapp_section_t.sectionNo) AS Section
-#         FROM seasapp_section_t,seasapp_course_t
-#         WHERE seasapp_section_t.courseID_id= seasapp_course_t.courseID 
-#         AND seasapp_section_t.year = %s
-#         AND seasapp_section_t.semester = %s 
-#         AND seasapp_course_t.schoolTitle_id = %s
-#         GROUP BY seasapp_section_t.enrolled;
-#         ''',[year,semester,school])
-#         ro = cursor.fetchall()
-#         print(ro)
-#         return ro 
-
-
 def enrollment_wise_course_distribution(semester,year,school):
 
 

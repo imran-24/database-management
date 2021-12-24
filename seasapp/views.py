@@ -20,8 +20,7 @@ def classroom_requirement(request):
             print('true')
             semester = request.POST.get('Semester')
             year = request.POST.get('Year')
-            section = classroom_requirement_course_offer(semester,year)
-           
+            section = classroom_requirement_course_offer(semester,year)   
         class6=[]
         sum6=0
         sumsec = 0
@@ -30,15 +29,12 @@ def classroom_requirement(request):
             cls = int(cls/12)
             sum6 += cls
             class6.append(cls) 
-       
         sum7=0
         class7=[]
         for cls in section:
             cls = int(cls/14)
             sum7 += cls
             class7.append(cls) 
-
-        
         a1 = [ section[0], class6[0], class7[0]]
         a2 = [ section[1], class6[1], class7[1]]
         a3 = [ section[2], class6[2], class7[2]]
@@ -64,13 +60,14 @@ def classroom_requirement(request):
            }  
         context['class6'] = json.dumps(class6)
         context['class7'] = json.dumps(class7)
-        
-        
-        # print(type(context))
-        # print(context)
-       
-       
         return render(request,'classroom_view.html',context=context)
+
+
+
+
+
+
+
 
 
 def usage_of_resource(request):
@@ -110,6 +107,15 @@ def usage_of_resource(request):
             }
             return render(request,'resource_usage_view.html',context=context)
 
+
+
+
+
+
+
+
+
+
 def available_resource(request):
    
     if request.method == "GET":
@@ -135,6 +141,26 @@ def available_resource(request):
         }
         
     return render(request,'available_resource.html',context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def Availability_course_offering_comparison(request):
     if request.method =='POST':
@@ -196,44 +222,6 @@ def Availability_course_offering_comparison(request):
 
     return render(request,'AvailabilityVScourse_offering_view.html',context=context)
 
-# def section_based_on_enrollment(request):
-#     if request.method == 'GET':
-#         semester = request.GET.get('Semester')
-#         year = request.GET.get('Year')
-#         SBE = sections_based_on_enrolled(semester,year,'SBE')
-#         SELS = sections_based_on_enrolled(semester,year,'SELS')
-#         SETS = sections_based_on_enrolled(semester,year,'SETS')
-#         SLASS = sections_based_on_enrolled(semester,year,'SLASS')
-#         SPPH = sections_based_on_enrolled(semester,year,'SPPH')
-        
-#         # sec =[]
-#         # for a in range(62):
-#         #     SBE1 =[]
-#         #     s = 0
-#         #     s = a
-#         #     b = s+1
-#         #     print(s)
-#         #     while SBE[a][a] != b:
-#         #         SBE1.append("")
-#         #         b += 1
-#         #     SBE1.append(SBE[a][s+1])
-
-#             #  
-#             # if SELS[s][s] == s+1:
-#             #     list.append(SELS[s][s+1])
-#             # # if SETS[s][s] == s+1:
-#             # #     list.append(SETS[s][s+1])
-#             # if SLASS[s][s] == s+1:
-#             #     list.append(SLASS[s][s+1])
-#             # if SPPH[s][s] == s+1:
-#             #     list.append(SPPH[s][s+1])
-
-#             sec.append(list)
-#         context={
-#             'section':sec,
-#         }
-
-#     return render(request,'section_based_on_enrollment/html',context=context)
 
 def Enrollment_wise_course_distribution(request):
     if request.method == "POST":
@@ -279,31 +267,28 @@ def Enrollment_wise_course_distribution(request):
         
     return render(request,'course_distribution_view.html',context= context)
 
+
+
+
+
+
 def revenue_of_IUB(request):
     if request.method == "POST":
-        
         FromYear = request.POST.get('YearF')
-        
         ToYear = request.POST.get('YearT')
-        
-        
         School=[]
-       
         semester=["Spring",'Summer','Autumn']
         school = School_T.objects.all()
         rows=[]
         total=[]
         while int(FromYear) <= int(ToYear) :
             i = 0 
-            
             for i in range(len(semester)):
                 j = 0
                 sum = 0
                 School=[]
-                
                 scl = str(FromYear)+str(i+1)+semester[i]
                 School.append(scl)
-
                 for j in range(len(school)):
                     num = IUB_revenue(semester[i],FromYear,school[j])
                      
@@ -311,15 +296,13 @@ def revenue_of_IUB(request):
                     if num is None:
                         pass 
                     else: 
-                        sum += num 
-                         
+                        sum += num        
                 if sum == 0: 
                     School.clear()
                 else:
                     total.append(sum)
                     School.append(sum)
-                    rows.append(School)  
-               
+                    rows.append(School)     
             FromYear = int(FromYear) + 1
         i = 0
         change=[]
@@ -330,7 +313,6 @@ def revenue_of_IUB(request):
                 rows[i+3].append(str(int(num))+"%")
             except:
                 pass
-        
         SBE=[]
         SETS=[]
         SELS=[]
@@ -345,7 +327,6 @@ def revenue_of_IUB(request):
             SELS.append(rows[i][3])
             SLASS.append(rows[i][4])
             SPPH.append(rows[i][5])
-
         context={
             'revenue': rows
             }
@@ -360,32 +341,23 @@ def revenue_of_IUB(request):
 
 
 def revenue_in_engineering_school(request):
-
-    if request.method == "POST":
-        
+    if request.method == "POST": 
         FromYear = request.POST.get('YearF')
-        
         ToYear = request.POST.get('YearT')
-        
         School=[]
-       
         semester=["Spring",'Summer','Autumn']
         dept = Department_T.objects.all()
         rows=[]
         while int(FromYear) <= int(ToYear) :
             i = 0 
-
             for i in range(len(semester)):
                 j = 0
                 sum = 0  
                 School=[]
-                
                 scl = str(FromYear)+str(i+1)+semester[i]
                 School.append(scl)
-               
                 for j in range(len(dept)):
-                    num = engineering_school_revenue(semester[i],FromYear,dept[j])
-                    
+                    num = engineering_school_revenue(semester[i],FromYear,dept[j])   
                     School.append(num)
                     if num is None:
                         pass 
@@ -396,7 +368,6 @@ def revenue_in_engineering_school(request):
                 else:
                     School.append(sum)
                     rows.append(School)  
-               
             FromYear = int(FromYear) + 1
         i = 0
         j = 0
@@ -413,7 +384,6 @@ def revenue_in_engineering_school(request):
                         eee.append(int(num))
                 except:
                     pass   
-      
         CSE=[]
         EEE=[]
         PS=[]
@@ -424,9 +394,6 @@ def revenue_in_engineering_school(request):
             CSE.append(rows[i][1])
             EEE.append(rows[i][2])
             PS.append(rows[i][3])
-            
-
-    
         context={
             'revenue': rows
             }
@@ -441,6 +408,8 @@ def revenue_in_engineering_school(request):
 
 
     return render(request,'revenue_in_engineering_school_view.html',context=context)
+
+
 
 
 def classroom(request):
