@@ -1,0 +1,1 @@
+web: gunicorn SEAS.wsgi --log-file -
