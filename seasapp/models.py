@@ -12,7 +12,7 @@ class School_T(models.Model):
         return self.schoolTitle
 
 class Department_T(models.Model):
-    # DeptID = models.CharField(max_length=6, primary_key=True)
+    
     departmentName = models.CharField(max_length=50,primary_key=True)
     schoolTitle = models.ForeignKey(School_T,null=True, on_delete=models.CASCADE)
 
@@ -20,8 +20,8 @@ class Department_T(models.Model):
         return self. departmentName
 
 class Course_T(models.Model):
-    courseID = models.CharField(max_length=7, primary_key=True)
-    courseName = models.CharField(max_length=100)
+    courseID = models.CharField(max_length=8, primary_key=True)
+    courseName = models.CharField(max_length=120)
     creditHour = models.IntegerField(null=True)
     departmentName= models.ForeignKey(Department_T, null=True, on_delete=models.CASCADE)
     schoolTitle = models.ForeignKey(School_T,null=True, on_delete=models.CASCADE)
@@ -31,7 +31,7 @@ class Course_T(models.Model):
 
 class OfferedCourse_T(models.Model):
     class Meta: 
-        #  unique_together = (("courseID", "offeredWith"),)
+       
         constraints = [
          models.UniqueConstraint(fields = ['courseID', 'offeredWith'], name = 'unique')]
 
@@ -39,14 +39,14 @@ class OfferedCourse_T(models.Model):
     offeredWith = models.ForeignKey(Course_T,null=True, on_delete=models.CASCADE,related_name='offeredwith')
    
 class Room_T(models.Model):
-    roomID = models.CharField(max_length=9, primary_key=True)
+    roomID = models.CharField(max_length=10, primary_key=True)
     roomSize = models.IntegerField()
 
     def __str__(self):
         return self.roomID
 
 class Faculty_T(models.Model):
-    facultyID = models.CharField(max_length =5,primary_key=True)
+    facultyID = models.CharField(max_length =7,primary_key=True)
     facultyName = models.CharField(max_length=50)
     departmentName = models.ForeignKey(Department_T, null=True, on_delete=models.CASCADE)
 
@@ -65,7 +65,7 @@ class Section_T(models.Model):
     facultyID = models.ForeignKey(Faculty_T, null=True, on_delete=models.CASCADE)
     startTime = models.CharField(max_length=10,null=True)
     endTime = models.CharField(max_length=10,null = True)
-    day = models.CharField(max_length=10, null=True)
+    day = models.CharField(max_length=8, null=True)
     semester = models.CharField(max_length=6)
     year = models.IntegerField()
    
