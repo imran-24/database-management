@@ -1,0 +1,114 @@
+{% extends 'AvailabilityVScourse_offering.html' %}
+
+{% block content1 %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+        
+        const date = '{{ resource | safe }}'
+        var data =JSON.parse(date);
+                
+        const date1 = '{{ sec | safe }}'
+        var data1 =JSON.parse(date1);
+
+        const date2 = '{{ dif | safe }}'
+        var data2 =JSON.parse(date2);
+
+        var data = google.visualization.arrayToDataTable([
+            ['Class Size', 'IUB resource','Spring','Difference' ],
+            ['20', data[0], data1[0],data2[0] ],
+            ['30', data[1], data1[1],data2[1]],
+            ['35', data[2], data1[2],data2[2]],
+            ['40', data[3], data1[3],data2[3]],
+            ['50', data[3], data1[3],data2[3]],
+            ['65', data[3], data1[3],data2[3]]
+        ]);
+
+        var options = {
+            chart: {
+            title: 'Resource Utilization in Spring and Summer',
+            subtitle: '',
+            }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    </script>
+  
+
+        
+
+{% endblock %}
+
+
+{% block content2 %}
+
+<h2> Availability Course Offering Comparison </h2>
+<table  border=2px style="margin: auto;background-color: rgb(216, 210, 210);">
+    <tr style="background-color:rgb(8, 226, 255);">
+        <th> Class size </th>
+        <th> IUB resource </th>
+        <th> {{ a7 }} </th>
+        <th> Difference</th>
+    </tr>
+    <tr style="text-align:center;">
+        {% for a in a1 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr >
+    <tr style="text-align:center;">
+        {% for a in a2 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr>
+    <tr style="text-align:center;">
+        {% for a in a3 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr>
+    <tr style="text-align:center;">
+        {% for a in a4 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr>
+    <tr style="text-align:center;">
+        {% for a in a5 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr>
+    <tr style="text-align:center;">
+        {% for a in a6 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr>
+     <tr style="text-align:center;">
+         <th>Total</th>
+        {% for a in a8 %}
+            <th>{{ a }}</th>
+        {% endfor %}
+    </tr>
+    <!--<tr>
+        {% for a in a8 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for a in a9 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for a in a10 %}
+            <td>{{ a }}</td>
+        {% endfor %}
+    </tr> -->
+</table>
+
+<div id="columnchart_material" style="width: 800px; height: 500px;margin: auto;margin-top: 20px;"></div>
+ 
+{% endblock %}

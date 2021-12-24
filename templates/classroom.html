@@ -1,0 +1,80 @@
+{% extends 'seas/base.html' %}
+
+
+
+{% block content %}
+<h2>Classroom Requirement As per Course offering</h2>
+<div style="margin-left: -150px;" >
+    <form action='/classroomTable/' method = "POST" >
+        {% csrf_token %}
+       
+        <div style="margin-left: -400ps;">
+            <div><label for="standard-select">Year</label></div>
+            <input type="number" min="2009" max="2021" step="1" value="2016"  name='Year'>
+        </div> 
+          <div style="float: right;margin-right: 600px; margin-top: -60px;"  >
+            <label for="standard-select">Semester</label>
+            <div class="select">
+            <select id="standard-select" name='Semester'>
+                <option value="Spring">Spring</option>
+                <option value="Summer">Summer</option>
+                <option value="Autumn">Autumn</option>
+            </select>
+            <span class="focus"></span>
+            </div>
+          </div>
+          <div style="margin-top:20px;" >
+              <button type="submit">comfirm</button>
+          </div>
+    </form>
+</div>
+
+<!-- <div>
+    <form action='/available_resource/' method="GET">
+        <button type="submit">IUB available resource</button>
+    </form>
+    
+
+</div>
+
+<div>
+
+        <form action='/availability_course_offering/' method="GET">
+            {% csrf_token %}
+            <div><input type="text" placeholder="Year" name='Year'></div> 
+            <div >
+                <select id="list" name='Semester'onchange="getSelectValue();">
+                    <option value="summer">Summer<option>
+                    <option value="autumn">Autumn</option>
+                    <option value="spring">Spring</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit">Availability and course offering comparison</button>
+            </div>
+        </form>
+</div>
+
+<div>
+    <form action='/enrollment_wise_course_distribution/' method="GET">
+        {% csrf_token %}
+        <div><input type="text" placeholder="Year" name='Year'></div> 
+        <div >
+            <select id="list" name='Semester'onchange="getSelectValue();">
+                <option value="summer">Summer<option>
+                <option value="autumn">Autumn</option>
+                <option value="spring">Spring</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">Section based on enrollment in each school</button>
+        </div>
+    </form>
+</div> -->
+{% block content2 %}
+
+{% endblock %}
+
+
+{% endblock %}
+

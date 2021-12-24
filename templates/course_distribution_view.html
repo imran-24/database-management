@@ -1,0 +1,93 @@
+{% extends 'course_distribution.html' %}
+
+{% block content1 %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+               
+        const date1 = '{{ sbe_|safe }}'
+        var sbe =JSON.parse(date1);
+       
+       
+        const date2 = '{{ sels_|safe }}'
+        var sels =JSON.parse(date2);
+                 
+        const date3 = '{{ sets_|safe }}'
+        var sets =JSON.parse(date3);
+        
+        const date4 = '{{ slass_|safe }}'
+        var slass =JSON.parse(date4);
+        
+        const date5 = '{{ spph_|safe }}'
+        var spph =JSON.parse(date5); 
+
+        var data = google.visualization.arrayToDataTable([
+            ['Class Size', 'SBE','SELS','SETS','SLASS','SPHH' ],
+            ['1-10',      sbe[0], sels[0], sets[0], slass[0],  spph[0]],
+            ['11-20',      sbe[1], sels[1], sets[1], slass[1],  spph[1]],
+            ['21-30',      sbe[2], sels[2], sets[2], slass[2],  spph[2]],
+            ['31-35',      sbe[3], sels[3], sets[3], slass[3],  spph[3]],
+            ['36-40',      sbe[4], sels[4], sets[4], slass[4],  spph[4]],
+            ['41-50',      sbe[5], sels[5], sets[5], slass[5],  spph[5]],
+            ['51-55',      sbe[6], sels[6], sets[6], slass[6],  spph[6]],
+            ['56-60',      sbe[7], sels[7], sets[7], slass[7],  spph[7]],
+            ['60+',        sbe[8], sels[8], sets[8], slass[8],  spph[8]],
+        ]);
+
+        var options = {
+            chart: {
+            title: 'Company Performance',
+            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+            }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    </script>
+
+<!-- //   const data2 = '{{ SELS | safe }}'
+    //   var sels1 =JSON.parse(date2);
+    //   console.log(sels1[0])                       
+    //   const data3 = '{{ SETS | safe }}'
+    //   var sets1 =JSON.parse(date3);
+
+    //   const data4 = '{{ SLASS | safe }}'
+    //   var slass1 =JSON.parse(date4);
+
+    //   const data5 = '{{ SPPH | safe }}'
+    //   var spph1 =JSON.parse(date5); 
+    //    -->
+{% endblock %}
+
+{% block content2 %}
+
+<table border = 2px style="margin: auto;width: 600px;background-color: rgb(255, 202, 122);">
+    <tr >
+        <th style="text-align: center; background-color:rgb(255, 94, 0);" colspan="7" >{{ semester }}</th>
+    </tr >
+    <tr s>
+        <th>Enrollemnt</th>
+        <td>SBE</td>
+        <td>SELS</td>
+        <td>SETS</td>
+        <td>SLASS</td>
+        <td>SPPH</td>
+        <td>Total</td>
+    </tr>
+    {% for tr in row %}
+        <tr>
+           
+                {% for td in tr %}
+                    <td> {{ td }}</td>
+                {% endfor %}
+          
+        </tr>
+    {% endfor %}
+</table>
+<div id="columnchart_material" style="width: 800px; height: 500px;margin: auto;"></div>
+{% endblock %}

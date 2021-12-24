@@ -1,0 +1,26 @@
+{% extends 'seas/base.html' %}
+
+
+
+{% block content %}
+<h2>Enrollment wise course distribution among schools</h2>
+<div style="margin-left: -150px;" >
+    <form action='/revenue_view/' method = "POST" >
+        {% csrf_token %}
+       
+        <div style="margin-left: -400ps;">
+            <div><label for="standard-select">Year From</label></div>
+            <input type="number" min="2009" max="2021" step="1" value="2016"  name='YearF'>
+            <div><label for="standard-select">Year To</label></div>
+            <input type="number" min="2009" max="2021" step="1" value="2016"  name='YearT'>
+        </div> 
+          
+        <div style="margin-top:20px;" >
+            <button type="submit">comfirm</button>
+        </div>
+    </form>
+</div>
+{% block content2 %}
+
+{% endblock %}
+{% endblock %}

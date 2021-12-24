@@ -1,0 +1,34 @@
+{% extends 'seas/base.html' %}
+
+
+
+{% block content %}
+<h2>Usage of resource</h2>
+<div style="margin-left: -150px;" >
+    <form action='/resource_usage_view/' method = "POST" >
+        {% csrf_token %}
+       
+        <div style="margin-left: -400ps;">
+            <div><label for="standard-select">Year</label></div>
+            <input type="number" min="2009" max="2021" step="1" value="2016"  name='Year'>
+        </div> 
+          <div style="float: right;margin-right: 600px; margin-top: -60px;"  >
+            <label for="standard-select">Semester</label>
+            <div class="select">
+            <select id="standard-select" name='Semester'>
+                <option value="Spring">Spring</option>
+                <option value="Summer">Summer</option>
+                <option value="Autumn">Autumn</option>
+            </select>
+            <span class="focus"></span>
+            </div>
+          </div>
+          <div style="margin-top:20px;" >
+              <button type="submit">comfirm</button>
+          </div>
+    </form>
+</div>
+{% block content2 %}
+
+{% endblock %}
+{% endblock %}

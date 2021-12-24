@@ -1,0 +1,283 @@
+{% extends 'revenue.html' %}
+
+{% block content1 %}
+
+<div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['line']});
+    google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+    const date1 = '{{ sbe|safe }}'
+    var sbe =JSON.parse(date1);
+    
+    
+    const date2 = '{{ sels|safe }}'
+    var sels =JSON.parse(date2);
+                
+    const date3 = '{{ sets|safe }}'
+    var sets =JSON.parse(date3);
+    
+    const date4 = '{{ slass|safe }}'
+    var slass =JSON.parse(date4);
+    
+    const date5 = '{{ spph|safe }}'
+    var spph =JSON.parse(date5); 
+    
+    const date6 = '{{ title|safe }}'
+    var title =JSON.parse(date6); 
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('number', 'Day');
+    
+    data.addColumn('number', 'SBE');
+    data.addColumn('number', 'SETS');
+    data.addColumn('number', 'SELS');
+    data.addColumn('number', 'SLASS');
+    data.addColumn('number', 'SPPH');;
+
+    data.addRows([
+    
+    [3,  sbe[0],  sels[0],  sets[0], slass[0], spph[0]],
+    [4,  sbe[1],  sels[1],  sets[1], slass[1], spph[1]],
+    [5, sbe[2],  sels[2],  sets[2], slass[2], spph[2]],
+    [6,  sbe[3],  sels[3],  sets[3], slass[3], spph[3] ],
+    [7,   sbe[4],  sels[4],  sets[4], slass[4], spph[4]],
+    [8,  sbe[5],  sels[5],  sets[5], slass[5], spph[5]],
+    [9,  sbe[6],  sels[6],  sets[6], slass[6], spph[6]],
+    [10, sbe[7],  sels[7],  sets[7], slass[7], spph[7]],
+    [11,  sbe[8],  sels[8],  sets[8], slass[8], spph[8]],
+    [12,  sbe[9],  sels[9],  sets[9], slass[9], spph[9]],
+    [13,  sbe[10],  sels[10],  sets[10], slass[10], spph[10]],
+    [14, sbe[11],  sels[11],  sets[11], slass[11], spph[11]],
+    [15,  sbe[12],  sels[12],  sets[12], slass[12], spph[12]],
+    [16,  sbe[13],  sels[13],  sets[13], slass[13], spph[13]],
+    [17, sbe[14],  sels[14],  sets[14], slass[14], spph[14]],
+    [18,  sbe[15],  sels[15],  sets[15], slass[15], spph[15] ],
+    [19,   sbe[16],  sels[16],  sets[16], slass[16], spph[16]],
+    [20,  sbe[17],  sels[17],  sets[17], slass[17], spph[17]],
+    [21,  sbe[18],  sels[18],  sets[18], slass[18], spph[18]],
+    [22, sbe[19],  sels[19],  sets[19], slass[19], spph[19]],
+    [23,  sbe[20],  sels[20],  sets[20], slass[20], spph[20]],
+    [24,  sbe[21],  sels[21],  sets[21], slass[21], spph[21]],
+    [25,  sbe[22],  sels[22],  sets[22], slass[22], spph[22]],
+    [26, sbe[23],  sels[23],  sets[23], slass[23], spph[23]],
+    [27,  sbe[24],  sels[24],  sets[24], slass[24], spph[24]],
+    [28, sbe[25],  sels[25],  sets[25], slass[25], spph[25]],
+    [29,  sbe[26],  sels[26],  sets[26], slass[26], spph[26] ],
+    [30,   sbe[27],  sels[27],  sets[27], slass[27], spph[27]],
+    [31,  sbe[28],  sels[28],  sets[28], slass[28], spph[28]],
+    [32,  sbe[29],  sels[29],  sets[29], slass[29], spph[29]],
+    [33, sbe[30],  sels[30],  sets[30], slass[30], spph[30]],
+    [34,  sbe[31],  sels[31],  sets[31], slass[31], spph[31]],
+    [35,  sbe[32],  sels[32],  sets[32], slass[32], spph[32]],
+    [36,  sbe[33],  sels[33],  sets[33], slass[33], spph[33]],
+    [37, sbe[34],  sels[34],  sets[34], slass[34], spph[34]],
+    [38,  sbe[35],  sels[35],  sets[35], slass[35], spph[35]]
+    
+    ]);
+
+    var options = {
+    chart: {
+        title: 'Revenue Trend of the schools',
+        subtitle: ''
+    },
+    width: 900,
+    height: 500,
+    axes: {
+        x: {
+        0: {side: 'top'}
+        }
+    }
+    };
+
+    var chart = new google.charts.Line(document.getElementById('line_top_x'));
+
+    chart.draw(data, google.charts.Line.convertOptions(options));
+}
+</script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    const date1 = '{{ sbe|safe }}'
+        var sbe =JSON.parse(date1);
+       
+       
+        const date2 = '{{ sels|safe }}'
+        var sels =JSON.parse(date2);
+                 
+        const date3 = '{{ sets|safe }}'
+        var sets =JSON.parse(date3);
+        
+        const date4 = '{{ slass|safe }}'
+        var slass =JSON.parse(date4);
+        
+        const date5 = '{{ spph|safe }}'
+        var spph =JSON.parse(date5); 
+        
+        const date6 = '{{ title|safe }}'
+        var title =JSON.parse(date6); 
+
+    var data = google.visualization.arrayToDataTable([
+        ['year-semester','SBE','SELS','SETS','SLASS','SPPH'],
+    [title[0],  sbe[0],  sels[0],  sets[0], slass[0], spph[0]],
+        [title[1],  sbe[1],  sels[1],  sets[1], slass[1], spph[1]],
+        [title[2], sbe[2],  sels[2],  sets[2], slass[2], spph[2]],
+        [title[3],  sbe[3],  sels[3],  sets[3], slass[3], spph[3] ],
+        [title[4],   sbe[4],  sels[4],  sets[4], slass[4], spph[4]],
+        [title[5],  sbe[5],  sels[5],  sets[5], slass[5], spph[5]],
+        [title[6],  sbe[6],  sels[6],  sets[6], slass[6], spph[6]],
+        [title[8], sbe[7],  sels[7],  sets[7], slass[7], spph[7]],
+        [title[9],  sbe[8],  sels[8],  sets[8], slass[8], spph[8]],
+        [title[10],  sbe[9],  sels[9],  sets[9], slass[9], spph[9]],
+        [title[11],  sbe[10],  sels[10],  sets[10], slass[10], spph[10]],
+        [title[12], sbe[11],  sels[11],  sets[11], slass[11], spph[11]],
+        [title[13],  sbe[12],  sels[12],  sets[12], slass[12], spph[12]],
+        [title[14],  sbe[13],  sels[13],  sets[13], slass[13], spph[13]],
+        [title[15], sbe[14],  sels[14],  sets[14], slass[14], spph[14]],
+        [title[16],  sbe[15],  sels[15],  sets[15], slass[15], spph[15] ],
+        [title[17],   sbe[16],  sels[16],  sets[16], slass[16], spph[16]],
+        [title[18],  sbe[17],  sels[17],  sets[17], slass[17], spph[17]],
+        [title[19],  sbe[18],  sels[18],  sets[18], slass[18], spph[18]],
+        [title[20], sbe[19],  sels[19],  sets[19], slass[19], spph[19]],
+        [title[21],  sbe[20],  sels[20],  sets[20], slass[20], spph[20]],
+        [title[22],  sbe[21],  sels[21],  sets[21], slass[21], spph[21]],
+        [title[23],  sbe[22],  sels[22],  sets[22], slass[22], spph[22]],
+        [title[24], sbe[23],  sels[23],  sets[23], slass[23], spph[23]],
+        [title[25],  sbe[24],  sels[24],  sets[24], slass[24], spph[24]],
+        [title[26], sbe[25],  sels[25],  sets[25], slass[25], spph[25]],
+        [title[27],  sbe[26],  sels[26],  sets[26], slass[26], spph[26] ],
+        [title[28],   sbe[27],  sels[27],  sets[27], slass[27], spph[27]],
+        [title[29],  sbe[28],  sels[28],  sets[28], slass[28], spph[28]],
+        [title[30],  sbe[29],  sels[29],  sets[29], slass[29], spph[29]],
+        [title[31], sbe[30],  sels[30],  sets[30], slass[30], spph[30]],
+        [title[32],  sbe[31],  sels[31],  sets[31], slass[31], spph[31]],
+        [title[33],  sbe[32],  sels[32],  sets[32], slass[32], spph[32]],
+        [title[34],  sbe[33],  sels[33],  sets[33], slass[33], spph[33]],
+        [title[35], sbe[34],  sels[34],  sets[34], slass[34], spph[34]],
+        [title[36],  sbe[35],  sels[35],  sets[35], slass[35], spph[35]]
+        
+    ]);
+
+    var options = {
+      title: 'Revenue Distribution among the schools',
+      hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+      vAxis: {minValue: 0}
+    };
+
+    var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+</script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+               
+       
+        const date6 = '{{ title|safe }}'
+        var title =JSON.parse(date6); 
+        
+        const date5 = '{{ changes|safe }}'
+        var sbe =JSON.parse(date5); 
+
+        var data = google.visualization.arrayToDataTable([
+        ['year-semester', 'changes' ],
+            [title[0],  sbe[0]],
+        [title[1],  sbe[1]],
+        [title[2], sbe[2]],
+        [title[3],  sbe[3] ],
+        [title[4],   sbe[4]],
+        [title[5],  sbe[5]],
+        [title[6],  sbe[6]],
+        [title[8], sbe[7]],
+        [title[9],  sbe[8]],
+        [title[10],  sbe[9]],
+        [title[11],  sbe[10]],
+        [title[12], sbe[11]],
+        [title[13],  sbe[12]],
+        [title[14],  sbe[13]],
+        [title[15], sbe[14]],
+        [title[16],  sbe[15] ],
+        [title[17],   sbe[16]],
+        [title[18],  sbe[17]],
+        [title[19],  sbe[18]],
+        [title[20], sbe[19]],
+        [title[21],  sbe[20]],
+        [title[22],  sbe[21]],
+        [title[23],  sbe[22]],
+        [title[24], sbe[23]],
+        [title[25],  sbe[24]],
+        [title[26], sbe[25]],
+        [title[27],  sbe[26] ],
+        [title[28],   sbe[27]],
+        [title[29],  sbe[28]],
+        [title[30],  sbe[29]],
+        [title[31], sbe[30]],
+        [title[32],  sbe[31]],
+        [title[33],  sbe[32]],
+        [title[34],  sbe[33]],
+        [title[35], sbe[34]],
+        [title[36],  sbe[35]]
+        ]);
+
+        var options = {
+            chart: {
+            title: 'IUB Revenue and Changes %',
+            subtitle: '',
+            }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    </script>
+
+
+
+</div>
+{% endblock %}
+
+{% block content2 %}
+
+<table border = 2px style="margin: auto;width: 600px;background-color: rgb(216, 210, 210)">
+   
+    <tr style="background-color:rgb(8, 226, 255);">
+        <th>{{" "}}</th>
+        <td>SBE</td>
+        <td>SELS</td>
+        <td>SETS</td>
+        <td>SLASS</td>
+        <td>SPPH</td>
+        <td>Total</td>
+        <td>Change</td>
+    </tr>
+    {% for tr in revenue %}
+        <tr>
+           
+                {% for td in tr %}
+                    {% if td is None %}
+                        <td> {{ 0 }}</td>
+                    {% else %}
+                        <td> {{ td }}</td>
+                    {% endif %}
+                {% endfor %}
+          
+        </tr>
+    {% endfor %}
+</table>
+<div style="margin-top: 20px;">
+    <div id="line_top_x" style="margin-top: 10px;margin: auto;"></div>
+    <div id="chart_div" style="width: 200%; height: 700px;margin-top: 10px;margin-left: -130px;"></div>
+    <div><div id="columnchart_material" style="width: 800px; height: 500px;margin: auto;"></div></div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,180 @@
+{% extends 'classroom.html' %}
+
+{% block content1 %}
+<div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+     
+      function drawChart() {
+        const date = '{{ class6 | safe }}'
+        var data =JSON.parse(date);
+        
+        const date1 = '{{ class7 | safe }}'
+        var data1 =JSON.parse(date1);
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['1-10',  data[0]],
+          ['11-20',  data[1]],
+          ['21-30',  data[2]],
+          ['31-35', data[3]],
+          ['36-40', data[4]],
+          ['41-50', data[5]],
+          ['51-55', data[6]],
+          ['56-65', data[7]],
+         
+        ]);
+
+        var options = {
+          title: 'Class size 6 requirement',
+          is3D: true,
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+</script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+     
+      function drawChart() {
+        const date = '{{ class7 | safe }}'
+        var data =JSON.parse(date);
+     
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['1-10',  data[0]],
+          ['11-20',  data[1]],
+          ['21-30',  data[2]],
+          ['31-35', data[3]],
+          ['36-40', data[4]],
+          ['41-50', data[5]],
+          ['51-55', data[6]],
+          ['56-65', data[7]],
+         
+        ]);
+
+        var options = {
+          title: 'Class size 7 requirement',
+          is3D: true,
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d1'));
+        chart.draw(data, options);
+      }
+</script>
+
+</div>
+
+
+{% endblock %}
+
+{% block content2 %}
+<table  style="margin: auto;margin-left: 300px;background-color: rgb(255, 202, 122)" border="2px">
+    <tr bgcolor=red >
+      <th style="text-align: center; background-color:rgb(255, 94, 0)"   colspan="4">{{ semester }} {{ year }}</th>
+        
+    </tr>
+    <tr border="3px">
+        <th> Class Size </th>
+        <th> Sections </th>
+        <th> Class room 6</th>
+        <th> Class romm 7</th>
+    </tr>
+    <tr border="1px">
+        <th> 1 - 10 </th>
+        {% for a in a1 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> 11 - 20 </th>
+        {% for a in a2 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> 21 - 30 </th>
+        {% for a in a3 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> 31 - 35 </th>
+        {% for a in a4 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> 36 - 40 </th>
+        {% for a in a5 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> 41 - 50 </th>
+        {% for a in a6 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> 51 - 55 </th>
+        {% for a in a7 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+    <tr>
+        <th> 56 - 65 </th>
+        {% for a in a8 %}
+            <td> {{ a }} </td>
+        {% endfor %} 
+    </tr> 
+
+    <tr>
+      <th> Total </th>
+      {% for a in a9 %}
+          <td> {{ a }} </td>
+      {% endfor %} 
+  </tr> 
+
+</table>
+
+<div style="width: 1000px;margin: auto;">
+    <div id="piechart_3d1" style="width: 500px; height: 300px;float: right;" ></div>
+    <div id="piechart_3d" style="width: 500px; height: 300px;"></div>
+</div>
+
+<!-- <div id="container" style="width: 75%;">
+    <canvas id="pie-chart"></canvas>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <script>
+
+    var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: '{{ data|safe }}',
+           backgroundColor: ['#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3' ],
+          label: 'labels'
+        }],
+        labels: {{ labels|safe }}
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+  </script> -->
+{% endblock %}
