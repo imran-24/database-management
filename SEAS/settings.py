@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(8n&xljk*rpke_n#7cjo7q)lid(g$r3cu#zez9b847_up)bjqr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['seas-01-lite.herokuapp.com','localhost']
 
 
 # Application definition
@@ -80,12 +80,8 @@ WSGI_APPLICATION = 'SEAS.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'seas-database',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3308',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
 
     }
 }
