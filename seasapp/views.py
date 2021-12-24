@@ -2,7 +2,7 @@ from decimal import Context
 import json
 import simplejson as json
 from django.shortcuts import render
-
+from django.contrib.auth.decorators import login_required
 from seasapp.models import Department_T, School_T
 from .raw_sql import *
 from json import dumps
@@ -12,6 +12,7 @@ from json import dumps
 def success(request):
     return render(request,'success.html',{})
 
+@login_required
 def home(request):
     return render(request,'seas/home.html',{})
 
@@ -121,9 +122,14 @@ def available_resource(request):
         a3=[s['room'][2],s['space'][2],s['room'][2]*s['space'][2]]
         a4=[s['room'][3],s['space'][3],s['room'][3]*s['space'][3]]
         a5=[s['room'][4],s['space'][4],s['room'][4]*s['space'][4]]
-        a6=[s['room'][5],s['space'][5],s['room'][4]*s['space'][4]]
-       
-        
+        a6=[s['room'][5],s['space'][5],s['room'][5]*s['space'][5]]
+        b1 = s['space'][0]+s['space'][0]+s['space'][0]+s['space'][0]+s['space'][0]
+        b2 = s['room'][0]*s['space'][0]+s['room'][0]*s['space'][0]+s['room'][0]*s['space'][0]+s['room'][0]*s['space'][0]+s['room'][0]*s['space'][0]
+        a7 =['Total',b1,b2]
+        a9=b2*12
+        a10 = b2*14
+        a11=int(a9/3.5)
+        a12=int(a10/3.5)
         context={
             'a1':a1,
             'a2':a2,
@@ -131,7 +137,11 @@ def available_resource(request):
             'a4':a4,
             'a5':a5,
             'a6':a6,
-            
+            'a7':a7,
+            'a9':a9,
+            'a10':a10,
+            'a11':a11,
+            'a12':a12
         }
         
     return render(request,'available_resource.html',context)

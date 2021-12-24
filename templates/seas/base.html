@@ -20,16 +20,20 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
 
           <div class="container">
+           {% if user.is_authenticated %}
             <a class="navbar-brand mr-4" href="/home/">SEAS</a>
+          
+           {% endif %}
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarToggle">
               <div class="navbar-nav mr-auto">
-                <a class="nav-item nav-link" href="/home/">Home</a>
-                <a class="nav-item nav-link" href="/update/">Update</a>
-                <div class="dropdown">
-                    <button class="dropbtn">Main Menu</button>
+                {% if user.is_authenticated %}
+                  <a class="nav-item nav-link" href="/home/">Home</a>
+                  <a class="nav-item nav-link" href="/update/">Upload File</a>
+                  <div class="dropdown">
+                    <button class="dropbtn">Menu</button>
                     <div class="dropdown-content">
                       <a href="{% url 'classroom' %}">Classroom requirement as per course offering</a>
                       <a href="{% url 'course_distribution' %}">Enrolment wise course distribution among the schools</a>
@@ -40,6 +44,7 @@
                       <a href="{% url 'engineering_school' %}">Revenue of engineering school</a>
                     </div>
                 </div>
+                {% endif %}
               </div>
               <!-- Navbar Right Side -->
               
@@ -49,8 +54,9 @@
                     <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                     <img class="rounded-circle article-img" src="{{ user.profile.image.url }}">                     
                 {% else %} 
+                    <h3 style="margin-right: 520px;color: lightgrey;">Student Enrollment Analysis System</h3>
                     <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-                    <a class="nav-item nav-link" href="{% url 'login' %}">Register</a>
+                    <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
                 {% endif %}
               </div>
             </div>
