@@ -13,11 +13,10 @@ def upload_file(request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             file = request.FILES['file']
-            if 'xlsx' in file:
-                instance = ModelWithFileField(file_field=file)
-                instance.save()
-                populate(file)
-                return redirect('/success/')
+            instance = ModelWithFileField(file_field=file)
+            instance.save()
+            populate(file)
+            return redirect('/success/')
     else:
         form = UploadFileForm()
     return render(request, 'upload.html', {'form': form})
