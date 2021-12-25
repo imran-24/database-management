@@ -13,11 +13,10 @@ def upload_file(request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             file = request.FILES['file']
-            if 'xlsx' in file:
-                instance = ModelWithFileField(file_field=file)
-                instance.save()
-                populate(file)
-                return redirect('/success/')
+            instance = ModelWithFileField(file_field=file)
+            instance.save()
+            populate(file)
+            return redirect('/success/')
     else:
         form = UploadFileForm()
     return render(request, 'upload.html', {'form': form})
@@ -106,78 +105,4 @@ def populate(filename):
 
 
 
-    # OfferedCourse_T
-    df = pd.read_excel(filename,usecols=['COFFER_COURSE_ID','COFFERED_WITH'])
-    for courseID,offeredWith in zip(df.COFFER_COURSE_ID,df.COFFERED_WITH): 
-       
-            courseID = Course_T.objects.filter(courseID=courseID).first()
-           
-            try:
-                offeredWith = Course_T.objects.filter(courseID=offeredWith).first()
-                course_model = OfferedCourse_T(courseID=courseID,offeredWith=offeredWith) 
-                    
-                course_model.save()
-            except Exception as e:
-                pass    
-            
-            try:
-                (course1,course2)= offeredWith.split(',')
-
-                offeredWith1 = Course_T.objects.filter(courseID=course1).first()
-                offeredWith2 = Course_T.objects.filter(courseID=course2).first()
-                if offeredWith1 is not None:
-                    course_model = OfferedCourse_T(courseID=courseID,offeredWith=offeredWith1) 
-                    
-                if offeredWith2 is not None:
-                    course_model = OfferedCourse_T(courseID=courseID,offeredWith=offeredWith2) 
-                    
-                course_model.save()
-              
-            except Exception as e1:
-                pass
-
-            try:
-                (course1,course2,course3)= offeredWith.split(',')
-
-                offeredWith1 = Course_T.objects.filter(courseID=course1).first()
-                offeredWith2 = Course_T.objects.filter(courseID=course2).first()
-                offeredWith3 = Course_T.objects.filter(courseID=course3).first()
-                if offeredWith1 is not None:
-                    course_model = OfferedCourse_T(courseID=courseID,offeredWith=offeredWith1) 
-                    
-                if offeredWith2 is not None:
-                    course_model = OfferedCourse_T(courseID=courseID,offeredWith=offeredWith2) 
-
-                if offeredWith3 is not None:
-                    course_model = OfferedCourse_T(courseID=courseID,offeredWith=offeredWith3) 
-                        
-                course_model.save()
-              
-            except Exception as e1:
-                pass
-            
-            
-            try:
-                (course1,course2,course3,course4)= offeredWith.split(',')
-
-                offeredWith1 = Course_T.objects.filter(courseID=course1).first()
-                offeredWith2 = Course_T.objects.filter(courseID=course2).first()
-                offeredWith3 = Course_T.objects.filter(courseID=course3).first()
-                offeredWith4 = Course_T.objects.filter(courseID=course3).first()
-                if offeredWith1 is not None:
-                    course_model = OfferedCourse_T(courseID=courseID,offeredWith=offeredWith1) 
-                    
-                if offeredWith2 is not None:
-                    course_model = OfferedCourse_T(courseID=courseID,offeredWith=offeredWith2) 
-
-                if offeredWith3 is not None:
-                    course_model = OfferedCourse_T(courseID=courseID,offeredWith=offeredWith3) 
-
-                if offeredWith4 is not None:
-                    course_model = OfferedCourse_T(courseID=courseID,offeredWith=offeredWith4) 
-                        
-                course_model.save()
-              
-            except Exception as e1:
-                pass
-            
+   

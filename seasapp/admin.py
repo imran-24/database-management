@@ -2,48 +2,45 @@ from django.contrib import admin
 from .models import *
 # Register your models here.
 
-class School_TAdmin(admin.ModelAdmin):
-    list_display =['schoolTitle',]
-    search_fields= ['schoolTitle',]
+admin.site.register(ModelWithFileField)
 
-admin.site.register(School_T, School_TAdmin)
+# class School_TAdmin(admin.ModelAdmin):
+#     list_display =['schoolTitle',]
+#     search_fields= ['schoolTitle',]
 
-
-class Department_TAdmin(admin.ModelAdmin):
-    list_display = ['departmentName','schoolTitle',]
-    search_fields= ['departmentName','schoolTitle',]
-
-admin.site.register(Department_T, Department_TAdmin)
+# admin.site.register(School_T, School_TAdmin)
 
 
-class Faculty_TAdmin(admin.ModelAdmin):
-    list_display = ['facultyID','facultyName','departmentName',]
+# class Department_TAdmin(admin.ModelAdmin):
+#     list_display = ['departmentName','schoolTitle',]
+#     search_fields= ['departmentName','schoolTitle',]
+
+# admin.site.register(Department_T, Department_TAdmin)
+
+
+# class Faculty_TAdmin(admin.ModelAdmin):
+#     list_display = ['facultyID','facultyName','departmentName',]
     
 
-admin.site.register(Faculty_T, Faculty_TAdmin)
+# admin.site.register(Faculty_T, Faculty_TAdmin)
 
 
-class Course_TAdmin(admin.ModelAdmin):
-    list_display = ['courseID','courseName','creditHour','departmentName',]
+# class Course_TAdmin(admin.ModelAdmin):
+#     list_display = ['courseID','courseName','creditHour','departmentName',]
     
-admin.site.register(Course_T, Course_TAdmin)
+# admin.site.register(Course_T, Course_TAdmin)
 
 
-class OfferedWith_TAdmin(admin.ModelAdmin):
-    list_dislay =['courseID','offerredWith',]
+
+# class Room_TAdmin(admin.ModelAdmin):
+#     list_display = ['roomID','roomSize']
     
+# admin.site.register(Room_T, Room_TAdmin)
 
-admin.site.register(OfferedCourse_T,OfferedWith_TAdmin)
 
-class Room_TAdmin(admin.ModelAdmin):
-    list_display = ['roomID','roomSize']
+
+# class Section_TAdmin(admin.ModelAdmin):
+#     list_display = ['sectionNo','courseID','capacity','enrolled','blocked',
+#     'roomID','facultyID','startTime','endTime','day','semester','year']
     
-admin.site.register(Room_T, Room_TAdmin)
-
-
-
-class Section_TAdmin(admin.ModelAdmin):
-    list_display = ['sectionNo','courseID','capacity','enrolled','blocked',
-    'roomID','facultyID','startTime','endTime','day','semester','year']
-    
-admin.site.register(Section_T, Section_TAdmin)
+# admin.site.register(Section_T, Section_TAdmin)

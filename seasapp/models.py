@@ -29,14 +29,7 @@ class Course_T(models.Model):
     def __str__(self):
         return self.courseID
 
-class OfferedCourse_T(models.Model):
-    class Meta: 
-       
-        constraints = [
-         models.UniqueConstraint(fields = ['courseID', 'offeredWith'], name = 'unique')]
 
-    courseID = models.ForeignKey(Course_T,null=True, on_delete=models.CASCADE,related_name='course')
-    offeredWith = models.ForeignKey(Course_T,null=True, on_delete=models.CASCADE,related_name='offeredwith')
    
 class Room_T(models.Model):
     roomID = models.CharField(max_length=10, primary_key=True)
